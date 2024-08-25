@@ -1,6 +1,10 @@
 package com.compiladoresufabc.PtBrLangCompiler.controllers;
 
+import core.PtBrLangGrammarParser;
+import core.PtBrLangGrammarLexer;
 
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -29,6 +33,23 @@ public class CompilerController {
             tempFile = File.createTempFile("temp", ".ptbrlang");
             try (FileOutputStream fos = new FileOutputStream(tempFile)) {
                 fos.write(file.getBytes());
+            }
+
+            try {
+                PtBrLangGrammarLexer lexer;
+                PtBrLangGrammarParser parser;
+
+                lexer = new PtBrLangGrammarLexer(CharStreams.fromFileName(tempFile.getAbsolutePath()));
+
+                CommonTokenStream tokenStream = new CommonTokenStream(lexer);
+
+                parser = new PtBrLangGrammarParser(tokenStream);
+
+                System.out.println("Compilando arquivo " + tempFile.getName());
+                parser.programa();
+                System.out.println("Arquivo compilado com sucesso!");
+            } catch (Exception e) {
+                return ResponseEntity.badRequest().body("Erro ao inicializar o lexer e parser.");
             }
 
             javaFile = new File(tempFile.getAbsolutePath().replace(".ptbrlang", ".java"));

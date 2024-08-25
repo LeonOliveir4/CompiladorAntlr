@@ -9,5 +9,4 @@ public class PtBrLangCompilerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PtBrLangCompilerApplication.class, args);
 	}
-
 }
