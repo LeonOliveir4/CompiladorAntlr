@@ -1,0 +1,58 @@
+spring:
+  application:
+    name: PtBrLangCompiler
+  output:
+    ansi:
+      enabled: ALWAYS
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  web:
+    locale: pt_BR
+    locale-resolver: fixed
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+    encoding:
+      charset: UTF-8
+      force: true
+  tomcat:
+    uri-encoding: UTF-8
+
+##HEALTHCHECK
+management:
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  endpoint:
+    health:
+     show-components: "always"
+     show-details: "always"
+    shutdown: 
+      enabled: "true"
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true  
+    endpoints:
+      web:
+        base-path: "/actuator"
+        path-mapping:
+          health: "health"
+        exposure:
+          include: "*"
+
+logging:
+  level:
+    brave: DEBUG
+    root: INFO
+    '[com.compiladoresufabc.PtBrLangCompiler]': DEBUG
+    '[io.micrometer.tracing]': DEBUG
+    '[io.micrometer.observation]': DEBUG
+
+compiler:
+  output-directory: "${user.home}/Desktop"
