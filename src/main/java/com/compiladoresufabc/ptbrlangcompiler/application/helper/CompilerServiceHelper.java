@@ -1,4 +1,4 @@
-package com.compiladoresufabc.PtBrLangCompiler.application.helper;
+package com.compiladoresufabc.ptbrlangcompiler.application.helper;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,8 +16,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.compiladoresufabc.PtBrLangCompiler.commons.antlr.PtBrLangGrammarLexer;
-import com.compiladoresufabc.PtBrLangCompiler.commons.antlr.PtBrLangGrammarParser;
+import com.compiladoresufabc.ptbrlangcompiler.commons.antlr.PtBrLangGrammarLexer;
+import com.compiladoresufabc.ptbrlangcompiler.commons.antlr.PtBrLangGrammarParser;
 
 @Component
 public class CompilerServiceHelper {

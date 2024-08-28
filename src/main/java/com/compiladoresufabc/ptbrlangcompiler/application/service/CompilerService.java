@@ -1,11 +1,11 @@
-package com.compiladoresufabc.PtBrLangCompiler.application.service;
+package com.compiladoresufabc.ptbrlangcompiler.application.service;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.compiladoresufabc.PtBrLangCompiler.application.helper.CompilerServiceHelper;
-import com.compiladoresufabc.PtBrLangCompiler.application.port.in.CompilerUseCase;
+import com.compiladoresufabc.ptbrlangcompiler.application.helper.CompilerServiceHelper;
+import com.compiladoresufabc.ptbrlangcompiler.application.port.in.CompilerUseCase;
 
 @Service
 public class CompilerService implements CompilerUseCase {

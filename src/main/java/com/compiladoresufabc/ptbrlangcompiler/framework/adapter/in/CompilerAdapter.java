@@ -1,4 +1,4 @@
-package com.compiladoresufabc.PtBrLangCompiler.framework.adapter.in;
+package com.compiladoresufabc.ptbrlangcompiler.framework.adapter.in;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.compiladoresufabc.PtBrLangCompiler.application.port.in.CompilerUseCase;
+import com.compiladoresufabc.ptbrlangcompiler.application.port.in.CompilerUseCase;
 
 @RestController
 @RequestMapping("/compiler")
