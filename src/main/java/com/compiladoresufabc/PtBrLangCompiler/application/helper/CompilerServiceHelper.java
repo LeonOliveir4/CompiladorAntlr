@@ -5,11 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.RecognitionException;
-import org.antlr.v4.runtime.misc.ParseCancellationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
@@ -20,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.compiladoresufabc.PtBrLangCompiler.commons.antlr.PtBrLangGrammarLexer;
 import com.compiladoresufabc.PtBrLangCompiler.commons.antlr.PtBrLangGrammarParser;
-import com.compiladoresufabc.PtBrLangCompiler.commons.errors.ParsingException;
 
 @Component
 public class CompilerServiceHelper {
@@ -84,18 +81,12 @@ public class CompilerServiceHelper {
 			CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 			PtBrLangGrammarParser parser = new PtBrLangGrammarParser(tokenStream);
 
-			parser.setErrorHandler(new BailErrorStrategy());
-
 			parser.programa();
 
 			String content = new String(Files.readAllBytes(originalFile.toPath()));
 			try (FileOutputStream fos = new FileOutputStream(outputFile)) {
 				fos.write(content.getBytes());
 			}
-		} catch (ParseCancellationException e) {
-			Throwable cause = e.getCause();
-			if (cause instanceof RecognitionException)
-				throw new IOException(new ParsingException((RecognitionException) cause).getMessage());
 		} catch (RecognitionException e) {
 			throw new IOException("Erro de análise léxica ou sintática: " + e.getMessage());
 		} catch (IOException e) {

@@ -88,11 +88,11 @@
 					</execution>
 				</executions>
 				<configuration>
-					<sourceDirectory>${project.basedir}/src/main/antlr4</sourceDirectory>
-					<outputDirectory>${project.basedir}/src/main/java/core</outputDirectory>
+					<sourceDirectory>${project.basedir}/src/main/java/com/compiladoresufabc/PtBrLangCompiler</sourceDirectory>
+					<outputDirectory>${project.basedir}/src/main/java/com/compiladoresufabc/PtBrLangCompiler/commons/antlr</outputDirectory>
 					<arguments>
 						<argument>-package</argument>
-						<argument>core</argument>
+						<argument>com.compiladoresufabc.PtBrLangCompiler.commons.antlr</argument>
 					</arguments>
 				</configuration>
 			</plugin>
