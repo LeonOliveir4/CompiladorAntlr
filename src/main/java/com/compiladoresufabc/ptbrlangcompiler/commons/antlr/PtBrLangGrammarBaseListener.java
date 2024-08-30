@@ -1,6 +1,15 @@
 // Generated from PtBrLangGrammar.g4 by ANTLR 4.13.2
 package com.compiladoresufabc.ptbrlangcompiler.commons.antlr;
 
+import java.util.ArrayList;
+import java.util.Stack;
+import java.util.HashMap;
+import com.compiladoresufabc.ptbrlangcompiler.domains.*;
+import com.compiladoresufabc.ptbrlangcompiler.commons.*;
+import com.compiladoresufabc.ptbrlangcompiler.commons.errors.*;
+import com.compiladoresufabc.ptbrlangcompiler.commons.generator.*;
+
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -29,6 +38,78 @@ public class PtBrLangGrammarBaseListener implements PtBrLangGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDeclaravar(PtBrLangGrammarParser.DeclaravarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclaravar(PtBrLangGrammarParser.DeclaravarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterComando(PtBrLangGrammarParser.ComandoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComando(PtBrLangGrammarParser.ComandoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdIF(PtBrLangGrammarParser.CmdIFContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdIF(PtBrLangGrammarParser.CmdIFContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdAttrib(PtBrLangGrammarParser.CmdAttribContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdAttrib(PtBrLangGrammarParser.CmdAttribContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdLeitura(PtBrLangGrammarParser.CmdLeituraContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdLeitura(PtBrLangGrammarParser.CmdLeituraContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdEscrita(PtBrLangGrammarParser.CmdEscritaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdEscrita(PtBrLangGrammarParser.CmdEscritaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExpr(PtBrLangGrammarParser.ExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -41,18 +122,6 @@ public class PtBrLangGrammarBaseListener implements PtBrLangGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExprl(PtBrLangGrammarParser.ExprlContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExprl(PtBrLangGrammarParser.ExprlContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterTermo(PtBrLangGrammarParser.TermoContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -60,6 +129,18 @@ public class PtBrLangGrammarBaseListener implements PtBrLangGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTermo(PtBrLangGrammarParser.TermoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExprl(PtBrLangGrammarParser.ExprlContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExprl(PtBrLangGrammarParser.ExprlContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

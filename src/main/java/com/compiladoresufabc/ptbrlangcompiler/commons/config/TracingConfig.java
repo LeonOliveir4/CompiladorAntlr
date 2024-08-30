@@ -1,6 +1,6 @@
 package com.compiladoresufabc.ptbrlangcompiler.commons.config;
 
-	import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import io.micrometer.observation.ObservationRegistry;
