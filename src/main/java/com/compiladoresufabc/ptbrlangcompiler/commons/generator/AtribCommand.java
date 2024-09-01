@@ -54,7 +54,12 @@ public class AtribCommand extends Command {
 
 	private String generateJavaCode() {
 		StringBuilder atribBuild = new StringBuilder();
-		atribBuild.append(var.getId() + " " + strOp  + " ");
+		if (strOp.equalsIgnoreCase("++") || strOp.equalsIgnoreCase("--")) {
+			atribBuild.append(var.getId() + strOp);
+		} else {
+			atribBuild.append(var.getId() + " " + strOp  + " ");
+		}
+		
 		if (null != exprString) {
 			atribBuild.append(exprString);
 		}
@@ -66,7 +71,11 @@ public class AtribCommand extends Command {
 
 	private String generateCCode() {
 		StringBuilder atribBuild = new StringBuilder();
-		atribBuild.append(var.getId() + " " + strOp  + " ");
+		if (strOp.equalsIgnoreCase("++") || strOp.equalsIgnoreCase("--")) {
+			atribBuild.append(var.getId() + strOp);
+		} else {
+			atribBuild.append(var.getId() + " " + strOp  + " ");
+		}
 		if (null != exprString) {
 			atribBuild.append(exprString);
 		}
@@ -77,7 +86,11 @@ public class AtribCommand extends Command {
 
 	private String generatePythonCode() {
 		StringBuilder atribBuild = new StringBuilder();
-		atribBuild.append(var.getId() + " " + strOp  + " ");
+		if (strOp.equalsIgnoreCase("++") || strOp.equalsIgnoreCase("--")) {
+			atribBuild.append(var.getId() + strOp);
+		} else {
+			atribBuild.append(var.getId() + " " + strOp  + " ");
+		}
 		if (null != exprString) {
 			atribBuild.append(exprString);
 		}

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.HashMap;
 import com.compiladoresufabc.ptbrlangcompiler.domains.*;
+import com.compiladoresufabc.ptbrlangcompiler.commons.*;
 import com.compiladoresufabc.ptbrlangcompiler.commons.errors.*;
 import com.compiladoresufabc.ptbrlangcompiler.commons.generator.*;
 

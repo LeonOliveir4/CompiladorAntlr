@@ -14,14 +14,16 @@ public class meuPrograma {
 		System.out.println(a);
 		if (a > 5) {
 			System.out.println("maior que 5");
+
 		} else {
 			System.out.println("menor que 5");
+
 		}
 		while (a > 5) {
 			System.out.println("maior q leo");
 			System.out.println("maior q leo");
 			a = _scTrx.nextInt();
-			a += 1;
+			a++;
 		}
 		do {
 			System.out.println("maior q leo");
@@ -30,8 +32,11 @@ public class meuPrograma {
 		System.out.println("oi agora vamos testar outro");
 		if (b >= 0) {
 			System.out.println("b positivo");
+
 		} else {
 			System.out.println("b negativo");
+
 		}
+		_scTrx.close();
 	}
 }

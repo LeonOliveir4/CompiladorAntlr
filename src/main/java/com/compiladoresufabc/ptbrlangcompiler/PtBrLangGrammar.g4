@@ -161,17 +161,20 @@ cmdAttrib   : ID { strExpr = "";
 					atribCommand.setStrOp(strOp);
 					}
               expr {
-					atribCommand.setExprString(strExpr);
+						atribCommand.setExprString(strExpr);
+		                if (strOp.equalsIgnoreCase("++") || strOp.equalsIgnoreCase("--")) {
+							System.out.println("Left  Side Expression Type = "+leftType);
+							atribCommand.setExprString(null);
+						} else {
+							System.out.println("Left  Side Expression Type = "+leftType);
+		                	System.out.println("Right Side Expression Type = "+rightType);
+							if (leftType.getValue() < rightType.getValue()){
+			                   throw new SemanticException("Type Mismatchig on Assignment");
+			                }
+						}
+						stack.peek().add(atribCommand);
 					}
               PV
-              {
-                 System.out.println("Left  Side Expression Type = "+leftType);
-                 System.out.println("Right Side Expression Type = "+rightType);
-                 stack.peek().add(atribCommand);
-                 if (leftType.getValue() < rightType.getValue()){
-                    throw new SemanticException("Type Mismatchig on Assignment");
-                 }
-              }
 			;			
 			
 cmdLeitura  : 'leia' AP 
