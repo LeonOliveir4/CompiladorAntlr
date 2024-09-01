@@ -1,5 +1,7 @@
 package com.compiladoresufabc.ptbrlangcompiler.commons.generator;
 
+import com.compiladoresufabc.ptbrlangcompiler.commons.enums.LanguageType;
+
 import java.util.List;
 
 public class WhileCommand extends Command {
@@ -34,24 +36,69 @@ public class WhileCommand extends Command {
 	}
 
 	@Override
-	public String generateCode() {
+	public String generateCode(LanguageType language) {
+		return switch (language) {
+			case JAVA -> generateJavaCode();
+			case C -> generateCCode();
+			case PYTHON -> generatePythonCode();
+			default -> null;
+		};
+	}
+
+	private String generateJavaCode() {
 		StringBuilder builder = new StringBuilder();
 		if (isReverse) {
-			builder.append("do {");
+			builder.append("do {\n\t");
 			for (Command cmdValue: trueList) {
-				builder.append(cmdValue.generateCode());
+				builder.append(cmdValue.generateCode(LanguageType.JAVA));
 			}
-			builder.append("} while (" + expression + ");");
+			builder.append("} while (" + expression + ");\n");
 		} else {
-			builder.append("while (" + expression + ") {");
+			builder.append("while (" + expression + ") {\n\t");
 			for (Command cmdValue : trueList) {
-				builder.append(cmdValue.generateCode());
+				builder.append(cmdValue.generateCode(LanguageType.JAVA));
 			}
 
-			builder.append("}");
+			builder.append("}\n");
 		}
-		
+
 		return builder.toString();
 	}
 
+	private String generateCCode() {
+		StringBuilder builder = new StringBuilder();
+		if (isReverse) {
+			builder.append("do {\n");
+			for (Command cmdValue: trueList) {
+				builder.append("\t").append(cmdValue.generateCode(LanguageType.C)).append("\n");
+			}
+			builder.append("} while (").append(expression).append(");\n");
+		} else {
+			builder.append("while (").append(expression).append(") {\n");
+			for (Command cmdValue : trueList) {
+				builder.append("\t").append(cmdValue.generateCode(LanguageType.C)).append("\n");
+			}
+			builder.append("}\n");
+		}
+
+		return builder.toString();
+	}
+
+	private String generatePythonCode() {
+		StringBuilder builder = new StringBuilder();
+		if (isReverse) {
+			builder.append("while True:\n");
+			for (Command cmdValue: trueList) {
+				builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON));
+			}
+			builder.append("\tif not (").append(expression).append("): break\n");
+		} else {
+			builder.append("while (").append(expression).append("):\n");
+			for (Command cmdValue : trueList) {
+				builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON));
+			}
+		}
+
+		return builder.toString();
+	}
 }

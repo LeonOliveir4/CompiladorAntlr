@@ -1,5 +1,6 @@
 package com.compiladoresufabc.ptbrlangcompiler.framework.adapter.in;
 
+import com.compiladoresufabc.ptbrlangcompiler.commons.enums.LanguageType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +31,17 @@ public class CompilerAdapter {
         }
         log.info("Iniciando conversão de arquivo {} para o formato {}", file.getOriginalFilename(),
         		language.toLowerCase());
-        switch (language.toLowerCase()) {
-            case "java":
-                return compileUseCase.compileJava(file);
-            case "c":
-                return compileUseCase.compileC(file);
-            case "python":
-                return compileUseCase.compilePython(file);
-            default:
-                return ResponseEntity.badRequest().body("Linguagem não suportada.");
+
+        try {
+            LanguageType languageType = LanguageType.fromString(language);
+            return switch (languageType) {
+                case JAVA -> compileUseCase.compileJava(file);
+                case C -> compileUseCase.compileC(file);
+                case PYTHON -> compileUseCase.compilePython(file);
+                default -> ResponseEntity.badRequest().body("Linguagem não suportada: " + language);
+            };
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

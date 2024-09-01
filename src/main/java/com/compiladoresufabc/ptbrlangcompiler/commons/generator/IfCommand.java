@@ -1,5 +1,7 @@
 package com.compiladoresufabc.ptbrlangcompiler.commons.generator;
 
+import com.compiladoresufabc.ptbrlangcompiler.commons.enums.LanguageType;
+
 import java.util.List;
 
 public class IfCommand extends Command {
@@ -44,23 +46,67 @@ public class IfCommand extends Command {
 	}
 
 	@Override
-	public String generateCode() {
+	public String generateCode(LanguageType language) {
+		return switch (language) {
+			case JAVA -> generateJavaCode();
+			case C -> generateCCode();
+			case PYTHON -> generatePythonCode();
+			default -> null;
+		};
+	}
+
+	private String generateJavaCode() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("if ("+expression+") {");
+		builder.append("if (").append(expression).append(") {\n");
 		for (Command cmdValue : trueList) {
-			builder.append(cmdValue.generateCode());
+			builder.append("\t").append(cmdValue.generateCode(LanguageType.JAVA)).append("\n");
 		}
-		builder.append("}");
-		
+		builder.append("}\n");
+
 		if (!falseList.isEmpty()) {
-			builder.append("else {");
+			builder.append("else {\n");
 			for (Command cmdValue : falseList) {
-				builder.append(cmdValue.generateCode());
+				builder.append("\t").append(cmdValue.generateCode(LanguageType.JAVA)).append("\n");
 			}
-			builder.append("}");
+			builder.append("}\n");
 		}
-		
+
 		return builder.toString();
 	}
 
+	private String generateCCode() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("if (").append(expression).append(") {\n");
+		for (Command cmdValue : trueList) {
+			builder.append("\t").append(cmdValue.generateCode(LanguageType.C)).append("\n");
+		}
+		builder.append("}\n");
+
+		if (!falseList.isEmpty()) {
+			builder.append("else {\n");
+			for (Command cmdValue : falseList) {
+				builder.append("\t").append(cmdValue.generateCode(LanguageType.C)).append("\n");
+			}
+			builder.append("}\n");
+		}
+
+		return builder.toString();
+	}
+
+	private String generatePythonCode() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("if ").append(expression).append(":\n");
+		for (Command cmdValue : trueList) {
+			builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON)).append("\n");
+		}
+
+		if (!falseList.isEmpty()) {
+			builder.append("else:\n");
+			for (Command cmdValue : falseList) {
+				builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON)).append("\n");
+			}
+		}
+
+		return builder.toString();
+	}
 }

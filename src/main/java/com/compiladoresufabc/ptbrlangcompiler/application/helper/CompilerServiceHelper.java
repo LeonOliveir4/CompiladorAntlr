@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import com.compiladoresufabc.ptbrlangcompiler.commons.enums.LanguageType;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.RecognitionException;
@@ -27,23 +28,24 @@ public class CompilerServiceHelper {
 	private String outputDirectory;
 
 	public ResponseEntity<?> processJavaFile(MultipartFile file) {
-		return processFile(file, ".java");
+		return processFile(file, LanguageType.JAVA);
 	}
 
 	public ResponseEntity<?> processCFile(MultipartFile file) {
-		return processFile(file, ".c");
+		return processFile(file, LanguageType.C);
 	}
 
 	public ResponseEntity<?> processPythonFile(MultipartFile file) {
-		return processFile(file, ".py");
+		return processFile(file, LanguageType.PYTHON);
 	}
 
-	private ResponseEntity<?> processFile(MultipartFile file, String outputExtension) {
+	private ResponseEntity<?> processFile(MultipartFile file, LanguageType language) {
 		File outputFile = null;
 
 		try {
-			outputFile = createOutputFile(file.getOriginalFilename(), outputExtension);
-			processFileWithANTLR(file, outputFile);
+			String extension = language.getLanguageExtension();
+			outputFile = createOutputFile(file.getOriginalFilename(), extension);
+			processFileWithANTLR(file, outputFile, language);
 			return sendFileAsResponse(outputFile);
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Erro ao processar o arquivo: " + e.getMessage());
@@ -60,7 +62,7 @@ public class CompilerServiceHelper {
 	}
 
 	// Retornando apenas o que veio em caso de sucesso, se não exception específica
-	private void processFileWithANTLR(MultipartFile originalFile, File outputFile) throws IOException {
+	private void processFileWithANTLR(MultipartFile originalFile, File outputFile, LanguageType language) throws IOException {
 		try {
 			PtBrLangGrammarLexer lexer = new PtBrLangGrammarLexer(
 					CharStreams.fromFileName(outputDirectory + originalFile.getOriginalFilename()));
@@ -70,12 +72,14 @@ public class CompilerServiceHelper {
 			parser.programa();
 			
 			Program program = parser.getProgram();
+
+			String generatedCode = program.generateCode(language);
 			
-			System.out.println(program.generateCode());
+			System.out.println(generatedCode);
 			
 			FileWriter fW = new FileWriter(outputFile);
 			PrintWriter pW = new PrintWriter(fW);
-			pW.println(program.generateCode());
+			pW.println(generatedCode);
 			pW.close();
 		} catch (RecognitionException e) {
 			throw new IOException("Erro de análise léxica ou sintática: " + e.getMessage());
