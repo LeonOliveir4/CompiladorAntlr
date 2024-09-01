@@ -17,7 +17,10 @@ import com.compiladoresufabc.ptbrlangcompiler.commons.generator.*;
     private Types leftType=null, rightType=null;
     private Program program = new Program();
     private String strExpr = "";
+    private String strOp = "";
     private IfCommand currentIfCommand;
+    private WhileCommand whileCommand;
+    private AtribCommand atribCommand;
     
     private Stack<ArrayList<Command>> stack = new Stack<ArrayList<Command>>();
     
@@ -78,6 +81,8 @@ comando     :  cmdAttrib
 			|  cmdLeitura
 			|  cmdEscrita
 			|  cmdIF
+			|  cmdWhile
+			| cmdWhileReverse
 			;
 			
 cmdIF		: 'se'  { stack.push(new ArrayList<Command>());
@@ -106,20 +111,63 @@ cmdIF		: 'se'  { stack.push(new ArrayList<Command>());
                	   stack.peek().add(currentIfCommand);
                }  			   
 			;
+
+cmdWhile		: 'enquanto' { stack.push(new ArrayList<Command>());
+							   strExpr = "";
+							   whileCommand = new WhileCommand(false);
+							 }
+				   AP 
+				   expr 
+				   OPREL { strExpr += _input.LT(-1).getText(); } 
+				   expr 
+				   FP	{ whileCommand.setExpression(strExpr); }
+				   'faca'
+				   comando+ {whileCommand.setTrueList(stack.pop());}
+				   'fimenquanto'
+				   {
+               	   stack.peek().add(whileCommand);
+               		}  
+			;
+
+cmdWhileReverse	: 'faca' { stack.push(new ArrayList<Command>());
+							   strExpr = "";
+							   whileCommand = new WhileCommand(true);
+						}
+					comando+ {whileCommand.setTrueList(stack.pop());}
+					'enquanto' { strExpr = "";}
+					AP
+					expr
+					OPREL { strExpr += _input.LT(-1).getText(); } 
+					expr
+					FP { whileCommand.setExpression(strExpr); }
+					'fimenquanto'
+					{
+               	   stack.peek().add(whileCommand);
+               		}  
+			;
 			
-cmdAttrib   : ID { if (!isDeclared(_input.LT(-1).getText())) {
+cmdAttrib   : ID { strExpr = "";
+				   if (!isDeclared(_input.LT(-1).getText())) {
                        throw new SemanticException("Undeclared Variable: "+_input.LT(-1).getText());
                    }
                    symbolTable.get(_input.LT(-1).getText()).setInitialized(true);
                    leftType = symbolTable.get(_input.LT(-1).getText()).getType();
+                   atribCommand = new AtribCommand(symbolTable.get(_input.LT(-1).getText()));
+                   
                  }
-              OP_AT 
-              expr 
+              OP_AT {
+					strOp = "";
+					strOp = _input.LT(-1).getText();
+					atribCommand.setStrOp(strOp);
+					}
+              expr {
+					atribCommand.setExprString(strExpr);
+					}
               PV
-              
               {
                  System.out.println("Left  Side Expression Type = "+leftType);
                  System.out.println("Right Side Expression Type = "+rightType);
+                 stack.peek().add(atribCommand);
                  if (leftType.getValue() < rightType.getValue()){
                     throw new SemanticException("Type Mismatchig on Assignment");
                  }
@@ -147,7 +195,7 @@ cmdEscrita  : 'escreva' AP
 			;			
 
 			
-expr		:  termo  { strExpr += _input.LT(-1).getText(); } exprl 			
+expr		: termo  { strExpr += _input.LT(-1).getText(); } exprl 			
 			;
 			
 termo		: ID  { if (!isDeclared(_input.LT(-1).getText())) {
@@ -192,10 +240,10 @@ exprl		: ( OP { strExpr += _input.LT(-1).getText(); }
               ) *
 			;	
 			
-OP			: '+' | '-' | '*' | '/' 
+OP			: '+' | '-' | '*' | '/'
 			;	
 			
-OP_AT	    : ':='
+OP_AT	    : ':=' | '+=' | '++' | '--' | '-='
 		    ;
 		    
 OPREL       : '>' | '<' | '>=' | '<= ' | '<>' | '=='

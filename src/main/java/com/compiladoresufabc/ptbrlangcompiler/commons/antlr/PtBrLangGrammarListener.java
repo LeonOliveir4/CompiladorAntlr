@@ -57,6 +57,26 @@ public interface PtBrLangGrammarListener extends ParseTreeListener {
 	 */
 	void exitCmdIF(PtBrLangGrammarParser.CmdIFContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PtBrLangGrammarParser#cmdWhile}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdWhile(PtBrLangGrammarParser.CmdWhileContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PtBrLangGrammarParser#cmdWhile}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdWhile(PtBrLangGrammarParser.CmdWhileContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PtBrLangGrammarParser#cmdWhileReverse}.
+	 * @param ctx the parse tree
+	 */
+	void enterCmdWhileReverse(PtBrLangGrammarParser.CmdWhileReverseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PtBrLangGrammarParser#cmdWhileReverse}.
+	 * @param ctx the parse tree
+	 */
+	void exitCmdWhileReverse(PtBrLangGrammarParser.CmdWhileReverseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PtBrLangGrammarParser#cmdAttrib}.
 	 * @param ctx the parse tree
 	 */

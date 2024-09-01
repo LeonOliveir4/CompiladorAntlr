@@ -74,6 +74,30 @@ public class PtBrLangGrammarBaseListener implements PtBrLangGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCmdWhile(PtBrLangGrammarParser.CmdWhileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdWhile(PtBrLangGrammarParser.CmdWhileContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCmdWhileReverse(PtBrLangGrammarParser.CmdWhileReverseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCmdWhileReverse(PtBrLangGrammarParser.CmdWhileReverseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCmdAttrib(PtBrLangGrammarParser.CmdAttribContext ctx) { }
 	/**
 	 * {@inheritDoc}
