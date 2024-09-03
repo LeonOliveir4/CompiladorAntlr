@@ -49,15 +49,17 @@ public class Program {
 	private String generateJavaCode() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("import java.util.Scanner;\n");
-		builder.append("public class " + name + "{\n");
+		builder.append("public class " + name + " {\n");
 		builder.append("\tpublic static void main(String args[]) {\n");
 		builder.append("\t\tScanner _scTrx = new Scanner(System.in);\n");
 		for (String varId : symbolTable.keySet()) {
 			Var var = symbolTable.get(varId);
 			if (var.getType() == Types.NUMBER) {
 				builder.append("\t\tint ");
-			} else {
+			} else if (var.getType() == Types.TEXT) {
 				builder.append("\t\tString ");
+			} else if (var.getType() == Types.BOOL) {
+				builder.append("\t\tboolean ");
 			}
 			builder.append(var.getId() + ";\n");
 		}
@@ -67,20 +69,25 @@ public class Program {
 		}
 		builder.append("\t\t_scTrx.close();\n");
 		builder.append("\t}\n");
-		builder.append("}\n");
+		builder.append("}");
 		return builder.toString();
 	}
 
 	private String generateCCode() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("#include <stdio.h>\n");
+		builder.append("#include <stdlib.h>\n");
+		builder.append("#include <stdbool.h>\n");
+		builder.append("#include <string.h>\n");
 		builder.append("int main() { \n");
 		for (String varId : symbolTable.keySet()) {
 			Var var = symbolTable.get(varId);
 			if (var.getType() == Types.NUMBER) {
 				builder.append("    int ");
-			} else {
+			} else if (var.getType() == Types.TEXT) {
 				builder.append("    char ");
+			} else if (var.getType() == Types.BOOL) {
+				builder.append("   bool ");
 			}
 			builder.append(var.getId() + ";\n");
 		}
@@ -99,8 +106,10 @@ public class Program {
 			Var var = symbolTable.get(varId);
 			if (var.getType() == Types.NUMBER) {
 				builder.append(var.getId()).append(": int = None\n");
-			} else {
+			} else if (var.getType() == Types.TEXT) {
 				builder.append(var.getId()).append(": str = None\n");
+			} else if (var.getType() == Types.BOOL) {
+				builder.append(var.getId()).append(": bool = None\n");
 			}
 		}
 

@@ -59,16 +59,16 @@ public class IfCommand extends Command {
 		StringBuilder builder = new StringBuilder();
 		builder.append("if (").append(expression).append(") {\n");
 		for (Command cmdValue : trueList) {
-			builder.append("\t").append(cmdValue.generateCode(LanguageType.JAVA)).append("\n");
+			builder.append("\t\t\t").append(cmdValue.generateCode(LanguageType.JAVA));
 		}
-		builder.append("}\n");
+		builder.append("\t\t}\n");
 
 		if (!falseList.isEmpty()) {
-			builder.append("else {\n");
+			builder.append("\t\telse {\n");
 			for (Command cmdValue : falseList) {
-				builder.append("\t").append(cmdValue.generateCode(LanguageType.JAVA)).append("\n");
+				builder.append("\t\t\t").append(cmdValue.generateCode(LanguageType.JAVA));
 			}
-			builder.append("}\n");
+			builder.append("\t\t}\n");
 		}
 
 		return builder.toString();

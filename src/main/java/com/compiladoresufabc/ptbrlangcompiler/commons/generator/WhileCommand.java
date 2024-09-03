@@ -48,18 +48,18 @@ public class WhileCommand extends Command {
 	private String generateJavaCode() {
 		StringBuilder builder = new StringBuilder();
 		if (isReverse) {
-			builder.append("do {\n\t");
+			builder.append("do {\n");
 			for (Command cmdValue: trueList) {
-				builder.append(cmdValue.generateCode(LanguageType.JAVA));
+				builder.append("\t\t\t" + cmdValue.generateCode(LanguageType.JAVA));
 			}
-			builder.append("} while (" + expression + ");\n");
+			builder.append("\t\t} while (" + expression + ");\n");
 		} else {
-			builder.append("while (" + expression + ") {\n\t");
+			builder.append("while (" + expression + ") {\n");
 			for (Command cmdValue : trueList) {
-				builder.append(cmdValue.generateCode(LanguageType.JAVA));
+				builder.append("\t\t\t" + cmdValue.generateCode(LanguageType.JAVA));
 			}
 
-			builder.append("}\n");
+			builder.append("\t\t}\n");
 		}
 
 		return builder.toString();
@@ -91,7 +91,7 @@ public class WhileCommand extends Command {
 			for (Command cmdValue: trueList) {
 				builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON));
 			}
-			builder.append("\tif not (").append(expression).append("): break\n");
+			builder.append("\n\tif not (").append(expression).append("):\n\t break\n");
 		} else {
 			builder.append("while (").append(expression).append("):\n");
 			for (Command cmdValue : trueList) {

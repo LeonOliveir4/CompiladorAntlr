@@ -46,9 +46,9 @@ import com.compiladoresufabc.ptbrlangcompiler.commons.generator.*;
     }
 }
  
-programa	: 'programa' ID  { program.setName(_input.LT(-1).getText());
-                               stack.push(new ArrayList<Command>()); 
-                             }
+programa	: 'programa' CLASS  { program.setName(_input.LT(-1).getText());
+                               	stack.push(new ArrayList<Command>()); 
+                             	}
                declaravar+
                'inicio'
                comando+
@@ -71,6 +71,8 @@ declaravar	: 'declare' { currentDecl.clear(); }
                'number' {currentType = Types.NUMBER;}
                |
                'text' {currentType = Types.TEXT;}
+               |
+               'bool' {currentType = Types.BOOL;}
                ) 
                
                { updateType(); } 
@@ -82,7 +84,7 @@ comando     :  cmdAttrib
 			|  cmdEscrita
 			|  cmdIF
 			|  cmdWhile
-			| cmdWhileReverse
+			|  cmdWhileReverse
 			;
 			
 cmdIF		: 'se'  { stack.push(new ArrayList<Command>());
@@ -91,8 +93,8 @@ cmdIF		: 'se'  { stack.push(new ArrayList<Command>());
                     } 
                AP 
                expr
-               OPREL  { strExpr += _input.LT(-1).getText(); }
-               expr
+               (OPREL)?  { strExpr += _input.LT(-1).getText(); }
+               (expr)?
                FP  { currentIfCommand.setExpression(strExpr); }
                'entao'  
                comando+                
@@ -118,8 +120,8 @@ cmdWhile		: 'enquanto' { stack.push(new ArrayList<Command>());
 							 }
 				   AP 
 				   expr 
-				   OPREL { strExpr += _input.LT(-1).getText(); } 
-				   expr 
+				   (OPREL { strExpr += _input.LT(-1).getText(); }
+				   expr)? 
 				   FP	{ whileCommand.setExpression(strExpr); }
 				   'faca'
 				   comando+ {whileCommand.setTrueList(stack.pop());}
@@ -137,8 +139,8 @@ cmdWhileReverse	: 'faca' { stack.push(new ArrayList<Command>());
 					'enquanto' { strExpr = "";}
 					AP
 					expr
-					OPREL { strExpr += _input.LT(-1).getText(); } 
-					expr
+					(OPREL { strExpr += _input.LT(-1).getText(); } 
+					expr)?
 					FP { whileCommand.setExpression(strExpr); }
 					'fimenquanto'
 					{
@@ -232,10 +234,18 @@ termo		: ID  { if (!isDeclared(_input.LT(-1).getText())) {
 			            else{
 			                if (rightType.getValue() < Types.TEXT.getValue()){			                    
 			                	rightType = Types.TEXT;
-			                	
 			                }
 			            }
 			         }
+			| BOOL {    if (rightType == null) {
+			 				rightType = Types.BOOL;
+			            }
+			            else{
+			                if (rightType.getValue() < Types.BOOL.getValue()){			                    
+			                	rightType = Types.BOOL;
+			                }
+			            }
+				   }
 			;
 			
 exprl		: ( OP { strExpr += _input.LT(-1).getText(); } 
@@ -283,4 +293,10 @@ TEXTO       : '"' ( [a-z] | [A-Z] | [0-9] | ',' | '.' | ' ' | '-' )* '"'
 			;		    
 		    			
 WS			: (' ' | '\n' | '\r' | '\t' ) -> skip
+			;
+
+BOOL		: 'Verdadeiro' | 'Falso'
+	        ;
+
+CLASS		: [A-Z] ( [A-Z] | [a-z] | [0-9] )*		
 			;
