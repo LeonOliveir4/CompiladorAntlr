@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.compiladoresufabc.ptbrlangcompiler.commons.enums.LanguageType;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.DefaultErrorStrategy;
 import org.antlr.v4.runtime.RecognitionException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
@@ -19,6 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.compiladoresufabc.ptbrlangcompiler.commons.antlr.PtBrLangGrammarLexer;
 import com.compiladoresufabc.ptbrlangcompiler.commons.antlr.PtBrLangGrammarParser;
+import com.compiladoresufabc.ptbrlangcompiler.commons.enums.LanguageType;
+import com.compiladoresufabc.ptbrlangcompiler.commons.errors.SemanticException;
+import com.compiladoresufabc.ptbrlangcompiler.commons.errors.SyntaxErrorListener;
 import com.compiladoresufabc.ptbrlangcompiler.commons.generator.Program;
 
 @Component
@@ -26,6 +31,8 @@ public class CompilerServiceHelper {
 
 	@Value("${compiler.output-directory}")
 	private String outputDirectory;
+	
+	private List<String> syntaxErrors;
 
 	public ResponseEntity<?> processJavaFile(MultipartFile file) {
 		return processFile(file, LanguageType.JAVA);
@@ -64,12 +71,22 @@ public class CompilerServiceHelper {
 	// Retornando apenas o que veio em caso de sucesso, se não exception específica
 	private void processFileWithANTLR(MultipartFile originalFile, File outputFile, LanguageType language) throws IOException {
 		try {
+			syntaxErrors = new ArrayList<>();
 			PtBrLangGrammarLexer lexer = new PtBrLangGrammarLexer(
 					CharStreams.fromFileName(outputDirectory + originalFile.getOriginalFilename()));
 			CommonTokenStream tokenStream = new CommonTokenStream(lexer);
 			PtBrLangGrammarParser parser = new PtBrLangGrammarParser(tokenStream);
+			
+			parser.setErrorHandler(new DefaultErrorStrategy());
+			
+			parser.removeErrorListeners();  // Remove listeners padrão
+	        parser.addErrorListener(new SyntaxErrorListener(syntaxErrors));
 
 			parser.programa();
+			
+			if (!syntaxErrors.isEmpty()) {
+	            throw new IOException("Erros de sintaxe encontrados: \n" + String.join("\n", syntaxErrors));
+	        }
 			
 			Program program = parser.getProgram();
 
@@ -84,6 +101,8 @@ public class CompilerServiceHelper {
 		} catch (RecognitionException e) {
 			throw new IOException("Erro de análise léxica ou sintática: " + e.getMessage());
 		} catch (IOException e) {
+			throw new IOException("Erro ao processar o arquivo: " + e.getMessage());
+		} catch (SemanticException e) {
 			throw new IOException("Erro ao processar o arquivo: " + e.getMessage());
 		}
 	}

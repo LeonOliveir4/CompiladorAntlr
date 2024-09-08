@@ -17,6 +17,7 @@ import com.compiladoresufabc.ptbrlangcompiler.commons.generator.*;
     private Types leftType=null, rightType=null;
     private Program program = new Program();
     private String strExpr = "";
+    private ArrayList<String> exprList;
     private String strOp = "";
     private IfCommand currentIfCommand;
     private WhileCommand whileCommand;
@@ -88,14 +89,17 @@ comando     :  cmdAttrib
 			;
 			
 cmdIF		: 'se'  { stack.push(new ArrayList<Command>());
-                      strExpr = "";
+                      exprList = new ArrayList<>();
                       currentIfCommand = new IfCommand();
                     } 
                AP 
-               expr
-               (OPREL)?  { strExpr += _input.LT(-1).getText(); }
-               (expr)?
-               FP  { currentIfCommand.setExpression(strExpr); }
+               exprList
+               FP  { 
+                     if (exprList.size() == 1 && leftType != Types.BOOL) {
+                        throw new SemanticException("Single expressions in conditions must be boolean.");
+                     }
+                     currentIfCommand.setExpressions(exprList);
+                   }
                'entao'  
                comando+                
                { 
@@ -115,33 +119,39 @@ cmdIF		: 'se'  { stack.push(new ArrayList<Command>());
 			;
 
 cmdWhile		: 'enquanto' { stack.push(new ArrayList<Command>());
-							   strExpr = "";
+							   exprList = new ArrayList<>();
 							   whileCommand = new WhileCommand(false);
 							 }
 				   AP 
-				   expr 
-				   (OPREL { strExpr += _input.LT(-1).getText(); }
-				   expr)? 
-				   FP	{ whileCommand.setExpression(strExpr); }
+				   exprList
+				   FP	{ 
+                        if (exprList.size() == 1 && leftType != Types.BOOL) {
+                           throw new SemanticException("Single expressions in conditions must be boolean.");
+                        }
+                        whileCommand.setExpressions(exprList); 
+                    }
 				   'faca'
 				   comando+ {whileCommand.setTrueList(stack.pop());}
 				   'fimenquanto'
 				   {
                	   stack.peek().add(whileCommand);
-               		}  
+               	   }  
 			;
 
 cmdWhileReverse	: 'faca' { stack.push(new ArrayList<Command>());
-							   strExpr = "";
+							   exprList = new ArrayList<>();
 							   whileCommand = new WhileCommand(true);
 						}
 					comando+ {whileCommand.setTrueList(stack.pop());}
 					'enquanto' { strExpr = "";}
 					AP
-					expr
-					(OPREL { strExpr += _input.LT(-1).getText(); } 
-					expr)?
-					FP { whileCommand.setExpression(strExpr); }
+					exprList
+					FP  { 
+                        if (exprList.size() == 1 && leftType != Types.BOOL) {
+                           throw new SemanticException("Single expressions in conditions must be boolean.");
+                        }
+                        whileCommand.setExpressions(exprList);
+                    }
 					'fimenquanto'
 					{
                	   stack.peek().add(whileCommand);
@@ -150,12 +160,11 @@ cmdWhileReverse	: 'faca' { stack.push(new ArrayList<Command>());
 			
 cmdAttrib   : ID { strExpr = "";
 				   if (!isDeclared(_input.LT(-1).getText())) {
-                       throw new SemanticException("Undeclared Variable: "+_input.LT(-1).getText());
+                       throw new SemanticException("Undeclared Variable During attribuition: "+_input.LT(-1).getText());
                    }
                    symbolTable.get(_input.LT(-1).getText()).setInitialized(true);
                    leftType = symbolTable.get(_input.LT(-1).getText()).getType();
                    atribCommand = new AtribCommand(symbolTable.get(_input.LT(-1).getText()));
-                   
                  }
               OP_AT {
 					strOp = "";
@@ -166,8 +175,18 @@ cmdAttrib   : ID { strExpr = "";
 						atribCommand.setExprString(strExpr);
 		                if (strOp.equalsIgnoreCase("++") || strOp.equalsIgnoreCase("--")) {
 							System.out.println("Left  Side Expression Type = "+leftType);
+							if (leftType != Types.NUMBER){
+                                throw new SemanticException("Operator " + strOp + " only allowed for numeric variables");
+                            }
 							atribCommand.setExprString(null);
-						} else {
+						} else if (strOp.equalsIgnoreCase("+=") || strOp.equalsIgnoreCase("-=")) {
+                            System.out.println("Left  Side Expression Type = " + leftType);
+                            System.out.println("Right Side Expression Type = " + rightType);
+                            if (leftType != Types.NUMBER || rightType != Types.NUMBER) {
+                                throw new SemanticException("Operator " + strOp + " requires both sides to be numeric");
+                            }
+                            stack.peek().add(atribCommand);
+                        } else {
 							System.out.println("Left  Side Expression Type = "+leftType);
 		                	System.out.println("Right Side Expression Type = "+rightType);
 							if (leftType.getValue() < rightType.getValue()){
@@ -181,7 +200,7 @@ cmdAttrib   : ID { strExpr = "";
 			
 cmdLeitura  : 'leia' AP 
                ID { if (!isDeclared(_input.LT(-1).getText())) {
-                       throw new SemanticException("Undeclared Variable: "+_input.LT(-1).getText());
+                       throw new SemanticException("Undeclared Variable During reading: "+_input.LT(-1).getText());
                     }
                     symbolTable.get(_input.LT(-1).getText()).setInitialized(true);
                     Command cmdRead = new ReadCommand(symbolTable.get(_input.LT(-1).getText()));
@@ -202,9 +221,53 @@ cmdEscrita  : 'escreva' AP
 			
 expr		: termo  { strExpr += _input.LT(-1).getText(); } exprl 			
 			;
-			
+
+exprList
+    : e=expr 
+      { 
+        exprList.add($e.text); 
+        leftType = rightType;  // Usa sua lógica de `rightType`
+      }
+      (
+        (OPREL { 
+            exprList.add(_input.LT(-1).getText()); 
+          } 
+          e2=expr { 
+            exprList.add($e2.text); 
+
+            // Verifica se os tipos são compatíveis
+            if (leftType != rightType) {
+                if (!(leftType == Types.NUMBER && rightType == Types.NUMBER)) {
+                    throw new SemanticException("Type mismatch: cannot compare " + leftType + " with " + rightType);
+                }
+            }
+
+            leftType = rightType;  // Mantém sua lógica de tipos
+          }
+        ) 
+      | (op=AND | op=OR) { 
+            exprList.add($op.text);
+
+            if (leftType != Types.BOOL) {
+                throw new SemanticException("Logical operators 'AND' or 'OR' require boolean expressions.");
+            }
+        }
+        e3=expr { 
+            exprList.add($e3.text); 
+
+            if (leftType != rightType) {
+                if (!(leftType == Types.NUMBER && rightType == Types.NUMBER)) {
+                    throw new SemanticException("Type mismatch: cannot compare " + leftType + " with " + rightType);
+                }
+            }
+
+            leftType = rightType;
+        }
+      )* 
+    ;
+	
 termo		: ID  { if (!isDeclared(_input.LT(-1).getText())) {
-                       throw new SemanticException("Undeclared Variable: "+_input.LT(-1).getText());
+                       throw new SemanticException("Undeclared Variable During term: "+_input.LT(-1).getText());
                     }
                     if (!symbolTable.get(_input.LT(-1).getText()).isInitialized()){
                        throw new SemanticException("Variable "+_input.LT(-1).getText()+" has no value assigned");
@@ -283,10 +346,10 @@ FP			: ')'
 DP			: ':'
 		    ;
 
-AND			: '&&'
+AND			: 'AND'
 			;
 
-OR			: '||'
+OR			: 'OR'
 			;
 		    
 TEXTO       : '"' ( [a-z] | [A-Z] | [0-9] | ',' | '.' | ' ' | '-' )* '"'
