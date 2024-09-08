@@ -146,6 +146,18 @@ public class PtBrLangGrammarBaseListener implements PtBrLangGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExprl(PtBrLangGrammarParser.ExprlContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExprl(PtBrLangGrammarParser.ExprlContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExprList(PtBrLangGrammarParser.ExprListContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -165,18 +177,6 @@ public class PtBrLangGrammarBaseListener implements PtBrLangGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTermo(PtBrLangGrammarParser.TermoContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterExprl(PtBrLangGrammarParser.ExprlContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExprl(PtBrLangGrammarParser.ExprlContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

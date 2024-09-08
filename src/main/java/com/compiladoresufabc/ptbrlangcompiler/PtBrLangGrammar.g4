@@ -96,7 +96,8 @@ cmdIF		: 'se'  { stack.push(new ArrayList<Command>());
                exprList
                FP  { 
                      if (exprList.size() == 1 && leftType != Types.BOOL) {
-                        throw new SemanticException("Single expressions in conditions must be boolean.");
+                        throw new SemanticException("Single expression '" + exprList.get(0) + "' in condition must be boolean at line " 
+                        + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ".");
                      }
                      currentIfCommand.setExpressions(exprList);
                    }
@@ -126,7 +127,7 @@ cmdWhile		: 'enquanto' { stack.push(new ArrayList<Command>());
 				   exprList
 				   FP	{ 
                         if (exprList.size() == 1 && leftType != Types.BOOL) {
-                           throw new SemanticException("Single expressions in conditions must be boolean.");
+                           throw new SemanticException("Single expression '" + exprList.get(0) + "' in condition must be boolean at line " + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ".");
                         }
                         whileCommand.setExpressions(exprList); 
                     }
@@ -148,7 +149,7 @@ cmdWhileReverse	: 'faca' { stack.push(new ArrayList<Command>());
 					exprList
 					FP  { 
                         if (exprList.size() == 1 && leftType != Types.BOOL) {
-                           throw new SemanticException("Single expressions in conditions must be boolean.");
+                           throw new SemanticException("Single expression '" + exprList.get(0) + "' in condition must be boolean at line " + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ".");
                         }
                         whileCommand.setExpressions(exprList);
                     }
@@ -219,14 +220,38 @@ cmdEscrita  : 'escreva' AP
 			;			
 
 			
-expr		: termo  { strExpr += _input.LT(-1).getText(); } exprl 			
-			;
+expr returns [Types type]
+    : termo  { 
+        strExpr += _input.LT(-1).getText(); 
+        $type = rightType;
+      } 
+      exprl?
+    ;
 
+exprl		: OP { 
+                strExpr += _input.LT(-1).getText(); 
+              } 
+              termo { 
+                strExpr += _input.LT(-1).getText(); 
+                if (leftType != rightType) {
+					if (!(leftType == Types.BOOL && rightType == null))
+                    	throw new SemanticException("Type mismatch: incompatible types '" + leftType + "' and '" + rightType + "' in operation at line " 
+                    	+ _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ". Expression: " + _input.LT(1).getText());
+                }
+                leftType = rightType;
+              }
+            ;
+			
 exprList
-    : e=expr 
-      { 
+    : { 
+        leftType = null;
+        rightType = null;
+        ArrayList<String> auxList = new ArrayList<>();
+      }
+      e=expr { 
         exprList.add($e.text); 
-        leftType = rightType;  // Usa sua lógica de `rightType`
+        auxList.add($e.text);
+        leftType = rightType;
       }
       (
         (OPREL { 
@@ -234,87 +259,70 @@ exprList
           } 
           e2=expr { 
             exprList.add($e2.text); 
+            auxList.add($e2.text);
+            rightType = $e2.type;
 
-            // Verifica se os tipos são compatíveis
             if (leftType != rightType) {
-                if (!(leftType == Types.NUMBER && rightType == Types.NUMBER)) {
-                    throw new SemanticException("Type mismatch: cannot compare " + leftType + " with " + rightType);
-                }
+                if (!(leftType == Types.BOOL && rightType == null))
+                    throw new SemanticException("Type mismatch: cannot compare '" + leftType + "' with '" + rightType + "' in expression '" +  $e.text + "' and '" +  $e2.text + "' at line " 
+                    + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ".");
             }
 
-            leftType = rightType;  // Mantém sua lógica de tipos
           }
-        ) 
+        ) {
+        if (auxList.size() == 1 && leftType != Types.BOOL) {
+            throw new SemanticException("Single expression '" + auxList.get(0) + "' in condition must be boolean at line " + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ".");
+        }
+      }
       | (op=AND | op=OR) { 
             exprList.add($op.text);
-
-            if (leftType != Types.BOOL) {
-                throw new SemanticException("Logical operators 'AND' or 'OR' require boolean expressions.");
-            }
+            auxList.clear();
         }
         e3=expr { 
             exprList.add($e3.text); 
+            auxList.add($e3.text);
+            leftType = $e3.type;
+        }
+
+        (OPREL { 
+            exprList.add(_input.LT(-1).getText()); 
+          } 
+          e4=expr { 
+            exprList.add($e4.text); 
+            auxList.add($e4.text);
+            rightType = $e4.type;
 
             if (leftType != rightType) {
-                if (!(leftType == Types.NUMBER && rightType == Types.NUMBER)) {
-                    throw new SemanticException("Type mismatch: cannot compare " + leftType + " with " + rightType);
-                }
+                if (!(leftType == Types.BOOL && rightType == null))
+                    throw new SemanticException("Type mismatch: cannot compare '" + leftType + "' with '" + rightType + "' in expression '" +  $e3.text + "' and '" +  $e4.text + "' at line " 
+                    + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ".");
             }
 
-            leftType = rightType;
+
+          }
+        )? {
+        if (auxList.size() == 1 && leftType != Types.BOOL) {
+            throw new SemanticException("Single expression '" + auxList.get(0) + "' in condition must be boolean at line " + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ".");
         }
-      )* 
+      }
+      )*
+      
     ;
-	
-termo		: ID  { if (!isDeclared(_input.LT(-1).getText())) {
-                       throw new SemanticException("Undeclared Variable During term: "+_input.LT(-1).getText());
-                    }
-                    if (!symbolTable.get(_input.LT(-1).getText()).isInitialized()){
-                       throw new SemanticException("Variable "+_input.LT(-1).getText()+" has no value assigned");
-                    }
-                    if (rightType == null){
-                       rightType = symbolTable.get(_input.LT(-1).getText()).getType();
-                    }   
-                    else{
-                       if (symbolTable.get(_input.LT(-1).getText()).getType().getValue() > rightType.getValue()){
-                          rightType = symbolTable.get(_input.LT(-1).getText()).getType();
-                          
-                       }
-                    }
-                  }   
-			| NUM    {  if (rightType == null) {
-			 				rightType = Types.NUMBER;
-			            }
-			            else{
-			                if (rightType.getValue() < Types.NUMBER.getValue()){			                    			                   
-			                	rightType = Types.NUMBER;
-			                }
-			            }
-			         }
-			| TEXTO  {  if (rightType == null) {
-			 				rightType = Types.TEXT;
-			            }
-			            else{
-			                if (rightType.getValue() < Types.TEXT.getValue()){			                    
-			                	rightType = Types.TEXT;
-			                }
-			            }
-			         }
-			| BOOL {    if (rightType == null) {
-			 				rightType = Types.BOOL;
-			            }
-			            else{
-			                if (rightType.getValue() < Types.BOOL.getValue()){			                    
-			                	rightType = Types.BOOL;
-			                }
-			            }
-				   }
-			;
-			
-exprl		: ( OP { strExpr += _input.LT(-1).getText(); } 
-                termo { strExpr += _input.LT(-1).getText(); } 
-              ) *
-			;	
+
+termo
+    : ID  { 
+            if (!isDeclared(_input.LT(-1).getText())) {
+                throw new SemanticException("Undeclared Variable During term: "+_input.LT(-1).getText());
+            }
+            if (!symbolTable.get(_input.LT(-1).getText()).isInitialized()){
+                throw new SemanticException("Variable "+_input.LT(-1).getText()+" has no value assigned");
+            }
+            rightType = symbolTable.get(_input.LT(-1).getText()).getType();
+          }   
+    | NUM { rightType = Types.NUMBER; }
+    | TEXTO { rightType = Types.TEXT; }
+    | BOOL { rightType = Types.BOOL; }
+    ;
 			
 OP			: '+' | '-' | '*' | '/'
 			;	

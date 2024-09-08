@@ -1,5 +1,6 @@
 package com.compiladoresufabc.ptbrlangcompiler.commons.generator;
 
+import com.compiladoresufabc.ptbrlangcompiler.commons.enums.Constants;
 import com.compiladoresufabc.ptbrlangcompiler.commons.enums.LanguageType;
 
 import java.util.List;
@@ -56,6 +57,11 @@ public class WhileCommand extends Command {
 
             for (int i = 0; i < expressions.size(); i++) {
                 String expressionPart = expressions.get(i).replace("AND", "&&").replace("OR", "||");
+                if (Constants.VERDADEIRO.getValue().equalsIgnoreCase(expressionPart)) {
+                	expressionPart = expressionPart.replace(expressionPart, "true");
+    			} else if (Constants.FALSO.getValue().equalsIgnoreCase(expressionPart)) {
+    				expressionPart = expressionPart.replace(expressionPart, "false");
+    			}
                 builder.append(expressionPart);
                 if (i < expressions.size() - 1) {
                     builder.append(" ");
@@ -68,6 +74,11 @@ public class WhileCommand extends Command {
 
             for (int i = 0; i < expressions.size(); i++) {
                 String expressionPart = expressions.get(i).replace("AND", "&&").replace("OR", "||");
+                if (Constants.VERDADEIRO.getValue().equalsIgnoreCase(expressionPart)) {
+                	expressionPart = expressionPart.replace(expressionPart, "true");
+    			} else if (Constants.FALSO.getValue().equalsIgnoreCase(expressionPart)) {
+    				expressionPart = expressionPart.replace(expressionPart, "false");
+    			}
                 builder.append(expressionPart);
                 if (i < expressions.size() - 1) {
                     builder.append(" ");
@@ -95,6 +106,11 @@ public class WhileCommand extends Command {
 
             for (int i = 0; i < expressions.size(); i++) {
                 String expressionPart = expressions.get(i).replace("AND", "&&").replace("OR", "||");
+                if (Constants.VERDADEIRO.getValue().equalsIgnoreCase(expressionPart)) {
+                	expressionPart = expressionPart.replace(expressionPart, "true");
+    			} else if (Constants.FALSO.getValue().equalsIgnoreCase(expressionPart)) {
+    				expressionPart = expressionPart.replace(expressionPart, "false");
+    			}
                 builder.append(expressionPart);
                 if (i < expressions.size() - 1) {
                     builder.append(" ");
@@ -107,6 +123,11 @@ public class WhileCommand extends Command {
 
             for (int i = 0; i < expressions.size(); i++) {
                 String expressionPart = expressions.get(i).replace("AND", "&&").replace("OR", "||");
+                if (Constants.VERDADEIRO.getValue().equalsIgnoreCase(expressionPart)) {
+                	expressionPart = expressionPart.replace(expressionPart, "true");
+    			} else if (Constants.FALSO.getValue().equalsIgnoreCase(expressionPart)) {
+    				expressionPart = expressionPart.replace(expressionPart, "false");
+    			}
                 builder.append(expressionPart);
                 if (i < expressions.size() - 1) {
                     builder.append(" ");
@@ -134,6 +155,11 @@ public class WhileCommand extends Command {
 
             for (int i = 0; i < expressions.size(); i++) {
                 String expressionPart = expressions.get(i).replace("AND", "and").replace("OR", "or");
+                if (Constants.VERDADEIRO.getValue().equalsIgnoreCase(expressionPart)) {
+                	expressionPart = expressionPart.replace(expressionPart, "True");
+    			} else if (Constants.FALSO.getValue().equalsIgnoreCase(expressionPart)) {
+    				expressionPart = expressionPart.replace(expressionPart, "False");
+    			}
                 builder.append(expressionPart);
                 if (i < expressions.size() - 1) {
                     builder.append(" ");
@@ -146,6 +172,11 @@ public class WhileCommand extends Command {
 
             for (int i = 0; i < expressions.size(); i++) {
                 String expressionPart = expressions.get(i).replace("AND", "and").replace("OR", "or");
+                if (Constants.VERDADEIRO.getValue().equalsIgnoreCase(expressionPart)) {
+                	expressionPart = expressionPart.replace(expressionPart, "True");
+    			} else if (Constants.FALSO.getValue().equalsIgnoreCase(expressionPart)) {
+    				expressionPart = expressionPart.replace(expressionPart, "False");
+    			}
                 builder.append(expressionPart);
                 if (i < expressions.size() - 1) {
                     builder.append(" ");

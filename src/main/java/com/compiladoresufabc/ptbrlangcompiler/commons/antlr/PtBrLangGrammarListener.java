@@ -117,6 +117,16 @@ public interface PtBrLangGrammarListener extends ParseTreeListener {
 	 */
 	void exitExpr(PtBrLangGrammarParser.ExprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PtBrLangGrammarParser#exprl}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprl(PtBrLangGrammarParser.ExprlContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PtBrLangGrammarParser#exprl}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprl(PtBrLangGrammarParser.ExprlContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PtBrLangGrammarParser#exprList}.
 	 * @param ctx the parse tree
 	 */
@@ -136,14 +146,4 @@ public interface PtBrLangGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTermo(PtBrLangGrammarParser.TermoContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link PtBrLangGrammarParser#exprl}.
-	 * @param ctx the parse tree
-	 */
-	void enterExprl(PtBrLangGrammarParser.ExprlContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PtBrLangGrammarParser#exprl}.
-	 * @param ctx the parse tree
-	 */
-	void exitExprl(PtBrLangGrammarParser.ExprlContext ctx);
 }
