@@ -5,23 +5,26 @@ public class meuPrograma {
 		Scanner _scTrx = new Scanner(System.in);
 		int a;
 		int b;
+		boolean c;
+		boolean d;
 		String x;
 		String y;
 		System.out.println("Hello World");
 		System.out.println("Fim do programa");
 		a = _scTrx.nextInt();
 		b = _scTrx.nextInt();
+		c = true;
+		d = false;
 		System.out.println(a);
 		if (a > 5) {
 			System.out.println("maior que 5");
 		} else {
 			System.out.println("menor que 5");
 		}
-		while (a > 5) {
+		while (c) {
 			System.out.println("maior q leo");
 			System.out.println("maior q leo");
-			a = _scTrx.nextInt();
-			a += 1;
+			c = _scTrx.nextBoolean();
 		}
 		do {
 			System.out.println("maior q leo");
@@ -33,5 +36,6 @@ public class meuPrograma {
 		} else {
 			System.out.println("b negativo");
 		}
+		_scTrx.close();
 	}
 }
