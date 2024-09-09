@@ -149,7 +149,7 @@ public class WhileCommand extends Command {
         if (isReverse) {
             builder.append("while True:\n");
             for (Command cmdValue : trueList) {
-                builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON));
+                builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON)).append("\n");
             }
             builder.append("\n\tif not (");
 
@@ -185,7 +185,7 @@ public class WhileCommand extends Command {
 
             builder.append("):\n");
             for (Command cmdValue : trueList) {
-                builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON));
+                builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON)).append("\n");
             }
         }
 

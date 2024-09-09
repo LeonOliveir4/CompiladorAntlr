@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.HashMap;
 import com.compiladoresufabc.ptbrlangcompiler.domains.*;
-import com.compiladoresufabc.ptbrlangcompiler.commons.*;
 import com.compiladoresufabc.ptbrlangcompiler.commons.errors.*;
 import com.compiladoresufabc.ptbrlangcompiler.commons.generator.*;
+import com.compiladoresufabc.ptbrlangcompiler.runtime.*;
 
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -158,18 +158,6 @@ public class PtBrLangGrammarBaseListener implements PtBrLangGrammarListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExprList(PtBrLangGrammarParser.ExprListContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExprList(PtBrLangGrammarParser.ExprListContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterTermo(PtBrLangGrammarParser.TermoContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -177,6 +165,42 @@ public class PtBrLangGrammarBaseListener implements PtBrLangGrammarListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTermo(PtBrLangGrammarParser.TermoContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTermol(PtBrLangGrammarParser.TermolContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTermol(PtBrLangGrammarParser.TermolContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFator(PtBrLangGrammarParser.FatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFator(PtBrLangGrammarParser.FatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExprList(PtBrLangGrammarParser.ExprListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExprList(PtBrLangGrammarParser.ExprListContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
