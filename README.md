@@ -60,12 +60,13 @@ A gramática deve seguir as seguintes regras:
 
 ## QUINTO PASSO: Suporte a Expressões e Operadores
 - [x] **Implementar Avaliador de Expressões Aritméticas**: Desenvolver a lógica para avaliar expressões aritméticas com respeito à precedência.
-- [x] **Implementar Operadores Lógicos**: Adicionar suporte a operadores lógicos (AND, OR, NOT) na linguagem e no compilador.
+- [x] **Implementar Operadores Lógicos**: Adicionar suporte a operadores lógicos (AND, OR) na linguagem e no compilador.
 
 ## OPCIONAIS: Considerando o Prazo Final
 - [x] **API Rest para o Compilador**: Implementação da API REST para o compilador.
 - [x] **Suporte a múltiplas linguagens-alvo (C e Python)**.
 - [x] **Avaliador de Expressões aritméticas e lógicas**. 
+- [x] **Implementar Operadores Lógicos**: Adicionar suporte a operadores lógicos (AND, OR) na linguagem e no compilador.
 - [ ] **Editor Highlight (simulando uma pequena IDE)** - Pendência para futuros desenvolvimentos.
 
 ---
