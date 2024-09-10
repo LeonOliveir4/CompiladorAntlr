@@ -178,6 +178,7 @@ fimprograma
 			d := Falso;
 			b := 2 / 2 + 3 * 2 * 2.5;
 			escreva(a);
+			escreva(b);
 			se (c AND a == b OR x == "value" OR d OR a == b) entao
 				escreva("maior que 5");
 			senao
