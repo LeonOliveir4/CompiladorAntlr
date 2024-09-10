@@ -3,12 +3,14 @@ package com.compiladoresufabc.ptbrlangcompiler.commons.generator;
 import com.compiladoresufabc.ptbrlangcompiler.commons.enums.Constants;
 import com.compiladoresufabc.ptbrlangcompiler.commons.enums.LanguageType;
 import com.compiladoresufabc.ptbrlangcompiler.domains.Var;
+import com.compiladoresufabc.ptbrlangcompiler.commons.antlr.PtBrLangGrammarParser;
 
 public class AtribCommand extends Command {
 
 	private Var var;
 	private String exprString;
 	private String strOp;
+	private PtBrLangGrammarParser parser;
 
 	public AtribCommand() {
 		super();

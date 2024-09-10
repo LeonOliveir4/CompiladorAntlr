@@ -5,6 +5,7 @@ public class Var {
 	private String id;
 	private Types type;
 	private boolean initialized;
+	private boolean used;
 
 	public Var(String id, Types type) {
 		super();
@@ -40,6 +41,14 @@ public class Var {
 	public boolean isInitialized() {
 		return initialized;
 	}
+	
+	public boolean isUsed() {
+        return used;
+    }
+
+    public void setUsed(boolean used) {
+        this.used = used;
+    }
 
 	public void setInitialized(boolean initialized) {
 		this.initialized = initialized;
@@ -47,6 +56,6 @@ public class Var {
 
 	@Override
 	public String toString() {
-		return "Var [id=" + id + ", type=" + type + ", initialized=" + initialized + "]";
+		return "Var{id='" + id + '\'' + ", type=" + type + ", initialized=" + initialized + ", used=" + used + '}';
 	}
 }

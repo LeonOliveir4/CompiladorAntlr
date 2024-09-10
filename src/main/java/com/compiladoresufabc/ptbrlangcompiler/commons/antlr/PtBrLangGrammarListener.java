@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.HashMap;
 import com.compiladoresufabc.ptbrlangcompiler.domains.*;
-import com.compiladoresufabc.ptbrlangcompiler.commons.*;
 import com.compiladoresufabc.ptbrlangcompiler.commons.errors.*;
 import com.compiladoresufabc.ptbrlangcompiler.commons.generator.*;
+import com.compiladoresufabc.ptbrlangcompiler.runtime.*;
 
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -127,16 +127,6 @@ public interface PtBrLangGrammarListener extends ParseTreeListener {
 	 */
 	void exitExprl(PtBrLangGrammarParser.ExprlContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PtBrLangGrammarParser#exprList}.
-	 * @param ctx the parse tree
-	 */
-	void enterExprList(PtBrLangGrammarParser.ExprListContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PtBrLangGrammarParser#exprList}.
-	 * @param ctx the parse tree
-	 */
-	void exitExprList(PtBrLangGrammarParser.ExprListContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link PtBrLangGrammarParser#termo}.
 	 * @param ctx the parse tree
 	 */
@@ -146,4 +136,34 @@ public interface PtBrLangGrammarListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTermo(PtBrLangGrammarParser.TermoContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PtBrLangGrammarParser#termol}.
+	 * @param ctx the parse tree
+	 */
+	void enterTermol(PtBrLangGrammarParser.TermolContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PtBrLangGrammarParser#termol}.
+	 * @param ctx the parse tree
+	 */
+	void exitTermol(PtBrLangGrammarParser.TermolContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PtBrLangGrammarParser#fator}.
+	 * @param ctx the parse tree
+	 */
+	void enterFator(PtBrLangGrammarParser.FatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PtBrLangGrammarParser#fator}.
+	 * @param ctx the parse tree
+	 */
+	void exitFator(PtBrLangGrammarParser.FatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PtBrLangGrammarParser#exprList}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprList(PtBrLangGrammarParser.ExprListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PtBrLangGrammarParser#exprList}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprList(PtBrLangGrammarParser.ExprListContext ctx);
 }

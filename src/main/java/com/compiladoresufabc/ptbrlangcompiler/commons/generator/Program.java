@@ -55,7 +55,7 @@ public class Program {
 		for (String varId : symbolTable.keySet()) {
 			Var var = symbolTable.get(varId);
 			if (var.getType() == Types.NUMBER) {
-				builder.append("\t\tint ");
+				builder.append("\t\tdouble ");
 			} else if (var.getType() == Types.TEXT) {
 				builder.append("\t\tString ");
 			} else if (var.getType() == Types.BOOL) {
@@ -83,7 +83,7 @@ public class Program {
 		for (String varId : symbolTable.keySet()) {
 			Var var = symbolTable.get(varId);
 			if (var.getType() == Types.NUMBER) {
-				builder.append("    int ");
+				builder.append("    float ");
 			} else if (var.getType() == Types.TEXT) {
 				builder.append("    char ");
 			} else if (var.getType() == Types.BOOL) {
@@ -105,7 +105,7 @@ public class Program {
 		for (String varId : symbolTable.keySet()) {
 			Var var = symbolTable.get(varId);
 			if (var.getType() == Types.NUMBER) {
-				builder.append(var.getId()).append(": int = None\n");
+				builder.append(var.getId()).append(": float = None\n");
 			} else if (var.getType() == Types.TEXT) {
 				builder.append(var.getId()).append(": str = None\n");
 			} else if (var.getType() == Types.BOOL) {
