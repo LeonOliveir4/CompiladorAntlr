@@ -59,6 +59,16 @@ import com.compiladoresufabc.ptbrlangcompiler.runtime.*;
     public boolean isDeclared(String id){
      return symbolTable.get(id) != null;
     }
+    
+    public void checkUnusedVariables() {
+		String yellowColor = "\u001B[33m";
+    	String resetColor = "\u001B[0m";
+        for (Var var : symbolTable.values()) {
+            if ((var.isInitialized() && !var.isUsed()) || !(var.isInitialized() && var.isUsed())) {
+                System.out.println(yellowColor + "Warning: Variable '" + var.getId() + "' initialized/declared but never used." + resetColor);
+            }
+        }
+    }
 }
 
 programa	: 'programa' CLASS  { program.setName(_input.LT(-1).getText());
@@ -73,26 +83,39 @@ programa	: 'programa' CLASS  { program.setName(_input.LT(-1).getText());
                {
                   program.setSymbolTable(symbolTable);
                   program.setCommandList(stack.pop());
+                  checkUnusedVariables();
                }
             ;
 
-declaravar	: 'declare' { currentDecl.clear(); }
-               ID  { currentDecl.add(new Var(_input.LT(-1).getText()));}
-               ( VIRG ID
-                 { currentDecl.add(new Var(_input.LT(-1).getText()));}
-               )*
-               DP
-               (
-               'number' {currentType = Types.NUMBER;}
-               |
-               'text' {currentType = Types.TEXT;}
-               |
-               'bool' {currentType = Types.BOOL;}
-               )
-
-               { updateType(); }
-               PV
-            ;
+declaravar
+    : 'declare' { currentDecl.clear(); }
+      ID  {
+          if (isDeclared(_input.LT(-1).getText())) {
+              throw new SemanticException("Variable '" + _input.LT(-1).getText() + "' already declared at line " 
+              + _input.LT(-1).getLine() + ", column " + _input.LT(-1).getCharPositionInLine() + ".");
+          }
+          currentDecl.add(new Var(_input.LT(-1).getText()));
+      }
+      ( VIRG ID
+        {
+          if (isDeclared(_input.LT(-1).getText())) {
+              throw new SemanticException("Variable '" + _input.LT(-1).getText() + "' already declared at line " 
+              + _input.LT(-1).getLine() + ", column " + _input.LT(-1).getCharPositionInLine() + ".");
+          }
+          currentDecl.add(new Var(_input.LT(-1).getText()));
+        }
+      )*
+      DP
+      (
+        'number' {currentType = Types.NUMBER;}
+        |
+        'text' {currentType = Types.TEXT;}
+        |
+        'bool' {currentType = Types.BOOL;}
+      )
+      { updateType(); }
+      PV
+    ;
 
 comando     :  cmdAttrib
             |  cmdLeitura
@@ -107,7 +130,13 @@ cmdIF		: 'se'  { stack.push(new ArrayList<Command>());
                       currentIfCommand = new IfCommand();
                     }
                AP
-               exprList
+               exprList {
+				          for (String var : exprList) {
+				              if (symbolTable.containsKey(var)) {
+				                  symbolTable.get(var).setUsed(true);
+				              }
+				          }
+				      }
                FP  {
                      if (exprList.size() == 1 && leftType != Types.BOOL) {
                         throw new SemanticException("Single expression '" + exprList.get(0) + "' in condition must be boolean at line "
@@ -138,7 +167,13 @@ cmdWhile	: 'enquanto' { stack.push(new ArrayList<Command>());
                       whileCommand = new WhileCommand(false);
                     }
                    AP
-                   exprList
+                   exprList {
+				          for (String var : exprList) {
+				              if (symbolTable.containsKey(var)) {
+				                  symbolTable.get(var).setUsed(true);
+				              }
+				          }
+				      }
                    FP	{
                                     if (exprList.size() == 1 && leftType != Types.BOOL) {
                                        throw new SemanticException("Single expression '" + exprList.get(0) + "' in condition must be boolean at line " + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ".");
@@ -160,7 +195,13 @@ cmdWhileReverse	: 'faca' { stack.push(new ArrayList<Command>());
      comando+ {whileCommand.setTrueList(stack.pop());}
      'enquanto' { strExpr = "";}
      AP
-     exprList
+     exprList {
+	          for (String var : exprList) {
+	              if (symbolTable.containsKey(var)) {
+	                  symbolTable.get(var).setUsed(true);
+	              }
+	          }
+	      }
      FP  {
                         if (exprList.size() == 1 && leftType != Types.BOOL) {
                            throw new SemanticException("Single expression '" + exprList.get(0) + "' in condition must be boolean at line " + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ".");
@@ -173,57 +214,71 @@ cmdWhileReverse	: 'faca' { stack.push(new ArrayList<Command>());
                  }
    ;
 
-cmdAttrib   : ID { strExpr = "";
-       if (!isDeclared(_input.LT(-1).getText())) {
-                       throw new SemanticException("Undeclared Variable During attribuition: "+_input.LT(-1).getText());
-                   }
-                   symbolTable.get(_input.LT(-1).getText()).setInitialized(true);
-                   leftType = symbolTable.get(_input.LT(-1).getText()).getType();
-                   atribCommand = new AtribCommand(symbolTable.get(_input.LT(-1).getText()));
-                 }
-              OP_AT {
-     strOp = "";
-     strOp = _input.LT(-1).getText();
-     atribCommand.setStrOp(strOp);
-     }
-              expr {
-      atribCommand.setExprString(strExpr);
-
-                  if (strOp.equalsIgnoreCase("++") || strOp.equalsIgnoreCase("--")) {
-       System.out.println("Left  Side Expression Type = "+leftType);
-       if (leftType != Types.NUMBER){
-                                throw new SemanticException("Operator " + strOp + " only allowed for numeric variables");
-                            }
-       atribCommand.setExprString(null);
-      } else if (strOp.equalsIgnoreCase("+=") || strOp.equalsIgnoreCase("-=")) {
-                            System.out.println("Left  Side Expression Type = " + leftType);
-                            System.out.println("Right Side Expression Type = " + rightType);
-                            if (leftType != Types.NUMBER || rightType != Types.NUMBER) {
-                                throw new SemanticException("Operator " + strOp + " requires both sides to be numeric");
-                            }
-                        } else {
-       System.out.println("Left  Side Expression Type = "+leftType);
-                   System.out.println("Right Side Expression Type = "+rightType);
-       if (leftType.getValue() < rightType.getValue()){
-                      throw new SemanticException("Type Mismatchig on Assignment");
-                   }
+cmdAttrib
+    : ID {
+          strExpr = "";
+          if (!isDeclared(_input.LT(-1).getText())) {
+              throw new SemanticException("Undeclared Variable During assignment: " + _input.LT(-1).getText());
+          }
+          symbolTable.get(_input.LT(-1).getText()).setInitialized(true);
+          symbolTable.get(_input.LT(-1).getText()).setUsed(true);
+          leftType = symbolTable.get(_input.LT(-1).getText()).getType();
+          atribCommand = new AtribCommand(symbolTable.get(_input.LT(-1).getText()));
       }
-      stack.peek().add(atribCommand);
-     }
-              PV
-   ;
+      OP_AT {
+          strOp = _input.LT(-1).getText();
+          atribCommand.setStrOp(strOp);
+      }
+      expr {
+          atribCommand.setExprString(strExpr);
 
-cmdLeitura  : 'leia' AP
-               ID { if (!isDeclared(_input.LT(-1).getText())) {
-                       throw new SemanticException("Undeclared Variable During reading: "+_input.LT(-1).getText());
-                    }
-                    symbolTable.get(_input.LT(-1).getText()).setInitialized(true);
-                    Command cmdRead = new ReadCommand(symbolTable.get(_input.LT(-1).getText()));
-                    stack.peek().add(cmdRead);
-                  }
-               FP
-               PV
-   ;
+          if (strOp.equalsIgnoreCase("++") || strOp.equalsIgnoreCase("--")) {
+              System.out.println("Left  Side Expression Type = " + leftType);
+              if (leftType != Types.NUMBER) {
+                  throw new SemanticException("Operator " + strOp + " is only allowed for numeric variables at line "
+                      + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ".");
+              }
+              atribCommand.setExprString(null);
+          }
+
+          else if (strOp.equalsIgnoreCase("+=") || strOp.equalsIgnoreCase("-=")) {
+              System.out.println("Left Side Expression Type = " + leftType);
+              System.out.println("Right Side Expression Type = " + rightType);
+              if (leftType != Types.NUMBER || rightType != Types.NUMBER) {
+                  throw new SemanticException("Operator " + strOp + " requires both sides to be numeric at line "
+                      + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ".");
+              }
+              stack.peek().add(atribCommand);
+          }
+
+          else {
+              System.out.println("Left Side Expression Type = " + leftType);
+              System.out.println("Right Side Expression Type = " + rightType);
+
+              if (!((leftType == Types.NUMBER && rightType == Types.NUMBER) ||
+                    (leftType == Types.TEXT && rightType == Types.TEXT) ||
+                    (leftType == Types.BOOL && rightType == Types.BOOL))) {
+                  throw new SemanticException("Type mismatch: cannot assign '" + rightType + "' to variable of type '" + leftType + "' at line "
+                      + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ".");
+              }
+              stack.peek().add(atribCommand);
+          }
+      }
+      PV;
+
+
+cmdLeitura
+    : 'leia' AP
+        ID {
+            if (!isDeclared(_input.LT(-1).getText())) {
+                throw new SemanticException("Undeclared Variable During reading: " + _input.LT(-1).getText());
+            }
+            symbolTable.get(_input.LT(-1).getText()).setInitialized(true);
+            symbolTable.get(_input.LT(-1).getText()).setUsed(true);
+            Command cmdRead = new ReadCommand(symbolTable.get(_input.LT(-1).getText()));
+            stack.peek().add(cmdRead);
+        }
+    FP PV;
 
 cmdEscrita  : 'escreva' AP
               ( termo  { Command cmdWrite = new WriteCommand(_input.LT(-1).getText());
@@ -236,21 +291,19 @@ cmdEscrita  : 'escreva' AP
 
 expr returns [Types type]
     : termo {
-        strExpr += _input.LT(-1).getText();
         $type = rightType;
       }
-      exprl
+      (exprl)*
     ;
 
 exprl returns [Types type]
-    : ((OP_SUM | OP_SUB) {
+    : (OP_SUM | OP_SUB) {
           strExpr += _input.LT(-1).getText();
           BinaryExpression bin = new BinaryExpression(_input.LT(-1).getText().charAt(0));
           bin.setLeft(exprStack.pop());
           exprStack.push(bin);
       }
       termo {
-          strExpr += _input.LT(-1).getText();
           AbstractExpression top = exprStack.pop();
           BinaryExpression root = (BinaryExpression)exprStack.pop();
           root.setRight(top);
@@ -264,25 +317,25 @@ exprl returns [Types type]
           leftType = rightType;
           System.out.println("Expression value " + root.evaluate());
           System.out.println(root.toJSON());
-      })*
+      }
     ;
 
 termo returns [Types type]
     : fator {
+		strExpr += _input.LT(-1).getText();
         $type = rightType;
       }
-      termol[$type]
+      (termol[$type])*
     ;
 
 termol[Types inheritedType] returns [Types type]
-    : ((OP_MUL | OP_DIV) {
+    : (OP_MUL | OP_DIV) {
           strExpr += _input.LT(-1).getText();
           BinaryExpression bin = new BinaryExpression(_input.LT(-1).getText().charAt(0));
           bin.setLeft(exprStack.pop());
           exprStack.push(bin);
       }
-      fator {
-          strExpr += _input.LT(-1).getText();
+      termo {
           AbstractExpression rightExpr = exprStack.pop();
           BinaryExpression root = (BinaryExpression) exprStack.pop();
           root.setRight(rightExpr);
@@ -296,25 +349,31 @@ termol[Types inheritedType] returns [Types type]
           $type = rightType;
           System.out.println("Expression value " + root.evaluate());
           System.out.println(root.toJSON());
-      })*
+      }
     ;
 
 fator returns [Types type]
-    : ID  {
-            if (!isDeclared(_input.LT(-1).getText())) {
-                throw new SemanticException("Undeclared Variable During term: "+_input.LT(-1).getText());
-            }
-            if (!symbolTable.get(_input.LT(-1).getText()).isInitialized()){
-                throw new SemanticException("Variable "+_input.LT(-1).getText()+" has no value assigned");
-            }
-            rightType = symbolTable.get(_input.LT(-1).getText()).getType();
+    : ID {
+          if (!isDeclared(_input.LT(-1).getText())) {
+              throw new SemanticException("Undeclared Variable During term: " + _input.LT(-1).getText());
           }
+          if (!symbolTable.get(_input.LT(-1).getText()).isInitialized()) {
+              throw new SemanticException("Variable " + _input.LT(-1).getText() + " has no value assigned");
+          }
+          rightType = symbolTable.get(_input.LT(-1).getText()).getType();
+      }
     | NUM {
-            exprStack.push(new UnaryExpression(Double.parseDouble($NUM.text)));
-            rightType = Types.NUMBER;
-          }
-    | TEXTO { rightType = Types.TEXT; }
-    | BOOL { rightType = Types.BOOL; }
+          exprStack.push(new UnaryExpression(Double.parseDouble($NUM.text)));
+          rightType = Types.NUMBER;
+      }
+    | TEXTO {
+          exprStack.push(new UnaryExpression($TEXTO.text));  // Texto como string literal
+          rightType = Types.TEXT;
+      }
+    | BOOL {
+          exprStack.push(new UnaryExpression(Boolean.parseBoolean($BOOL.text)));
+          rightType = Types.BOOL;
+      }
     ;
 
 

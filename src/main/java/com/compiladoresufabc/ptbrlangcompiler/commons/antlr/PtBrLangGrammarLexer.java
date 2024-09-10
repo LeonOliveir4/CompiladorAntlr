@@ -150,6 +150,16 @@ public class PtBrLangGrammarLexer extends Lexer {
 	    public boolean isDeclared(String id){
 	     return symbolTable.get(id) != null;
 	    }
+	    
+	    public void checkUnusedVariables() {
+			String yellowColor = "\u001B[33m";
+	    	String resetColor = "\u001B[0m";
+	        for (Var var : symbolTable.values()) {
+	            if ((var.isInitialized() && !var.isUsed()) || !(var.isInitialized() && var.isUsed())) {
+	                System.out.println(yellowColor + "Warning: Variable '" + var.getId() + "' initialized/declared but never used." + resetColor);
+	            }
+	        }
+	    }
 
 
 	public PtBrLangGrammarLexer(CharStream input) {

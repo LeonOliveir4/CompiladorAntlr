@@ -55,4 +55,4 @@ logging:
     '[io.micrometer.observation]': DEBUG
 
 compiler:
-  output-directory: "C:\\Users\\mb_la\\"
+  output-directory: "${user.home}/Desktop/"

@@ -39,7 +39,10 @@ public class ReadCommand extends Command {
 		StringBuilder builder = new StringBuilder();
 		builder.append(var.getId() + " = ");
 		switch (var.getType()) {
-			case Types.NUMBER -> builder.append("_scTrx.nextInt();");
+			case Types.NUMBER -> {
+				builder.append("_scTrx.nextDouble();\n");
+				builder.append("\t\t_scTrx.nextLine();");
+			}
 			case Types.TEXT -> builder.append("_scTrx.nextLine();");
 			case Types.BOOL -> builder.append("_scTrx.nextBoolean();");
 			default -> throw new IllegalArgumentException("Unexpected value: " + var.getType());
@@ -63,7 +66,7 @@ public class ReadCommand extends Command {
 		           .append("}\n");
 		} else {
 		    builder.append("scanf(\"%")
-		           .append(var.getType().equals(Types.NUMBER) ? "d" : "s")
+		           .append(var.getType().equals(Types.NUMBER) ? "f" : "s")
 		           .append("\", &")
 		           .append(var.getId())
 		           .append(");\n");

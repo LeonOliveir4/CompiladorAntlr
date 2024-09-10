@@ -161,6 +161,52 @@ inicio
 fim
 fimprograma
 ```
+
+```
+	programa MeuPrograma
+		declare a,b,z: number;
+		declare c,d: bool;
+		declare x,y: text;
+		declare xbacon: number;
+		inicio
+			escreva("Hello World");
+			escreva("Fim do programa");
+			leia(a);
+			leia(b);
+			leia(x);
+			c := Verdadeiro;
+			d := Falso;
+			b := 2 / 2 + 3 * 2 * 2.5;
+			escreva(a);
+			se (c AND a == b OR x == "value" OR d OR a == b) entao
+				escreva("maior que 5");
+			senao
+				escreva("menor que 5");
+			fimse
+			
+			enquanto (c AND a == b AND x == "value" OR d) faca
+				escreva("maior q leo");
+				escreva("maior q leo");
+				leia(c);
+			fimenquanto
+			
+			faca
+				escreva("maior q leo");
+				a +=1;
+			enquanto (Falso AND Verdadeiro)
+			fimenquanto
+			
+			escreva("oi agora vamos testar outro");
+			se (b >= 0) entao
+			   escreva("b positivo");
+			senao
+			   escreva("b negativo");
+			fimse
+			
+			
+		fim
+	fimprograma
+```
 ---
 ## Gramática ANTLR da PtBrLang
 ```

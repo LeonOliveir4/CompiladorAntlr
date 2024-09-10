@@ -38,14 +38,10 @@ public class WriteCommand extends Command {
 	}
 
 	private String generateCCode() {
-		// TODO: Precisamos corrigir print em C de acordo tipos, assim está errado.
-		// Supondo que o conteúdo seja uma string literal ou uma variável
 		if (content.startsWith("\"") && content.endsWith("\"")) {
-			// Conteúdo é uma string literal
 			return "printf(\"%s\\n\", " + content + ");\n";
 		} else {
-			// Conteúdo é uma variável, assumindo que seja um inteiro
-			return "printf(\"%d\\n\", " + content + ");\n";
+			return "printf(\"%.2f\\n\", " + content + ");\n";
 		}
 	}
 
