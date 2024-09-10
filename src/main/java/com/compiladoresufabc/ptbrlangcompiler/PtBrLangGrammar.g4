@@ -26,7 +26,7 @@ import com.compiladoresufabc.ptbrlangcompiler.runtime.*;
     private Stack<AbstractExpression> exprStack = new Stack<AbstractExpression>();
     private AbstractExpression top = null;
 
-    public Double generateValue(){
+    public double generateValue(){
         if (top == null){
             top = exprStack.pop();
         }
@@ -188,6 +188,7 @@ cmdAttrib   : ID { strExpr = "";
      }
               expr {
       atribCommand.setExprString(strExpr);
+
                   if (strOp.equalsIgnoreCase("++") || strOp.equalsIgnoreCase("--")) {
        System.out.println("Left  Side Expression Type = "+leftType);
        if (leftType != Types.NUMBER){
@@ -234,71 +235,69 @@ cmdEscrita  : 'escreva' AP
 
 
 expr returns [Types type]
-        : termo {
-            strExpr += _input.LT(-1).getText();
-            $type = rightType;
-        }
-            exprl?
-        ;
+    : termo {
+        strExpr += _input.LT(-1).getText();
+        $type = rightType;
+      }
+      exprl
+    ;
 
 exprl returns [Types type]
-            : (OP_SUM | OP_SUB) {
-                strExpr += _input.LT(-1).getText();
-                BinaryExpression bin = new BinaryExpression(strExpr.charAt(0));
-                bin.setLeft(exprStack.pop());
-                exprStack.push(bin);
-              }
-              termo {
-                strExpr += _input.LT(-1).getText();
-                AbstractExpression top = exprStack.pop();
-                BinaryExpression root = (BinaryExpression)exprStack.pop();
-                root.setRight(top);
-                exprStack.push(root);
+    : ((OP_SUM | OP_SUB) {
+          strExpr += _input.LT(-1).getText();
+          BinaryExpression bin = new BinaryExpression(_input.LT(-1).getText().charAt(0));
+          bin.setLeft(exprStack.pop());
+          exprStack.push(bin);
+      }
+      termo {
+          strExpr += _input.LT(-1).getText();
+          AbstractExpression top = exprStack.pop();
+          BinaryExpression root = (BinaryExpression)exprStack.pop();
+          root.setRight(top);
+          exprStack.push(root);
 
-                if (leftType != rightType) {
-                    if (!(leftType == Types.BOOL && rightType == null))
-                     throw new SemanticException("Type mismatch: incompatible types '" + leftType + "' and '" + rightType + "' in operation at line "
-                     + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ". Expression: " + _input.LT(1).getText());
-                }
-                leftType = rightType;
-              }
-            ;
+          if (leftType != rightType) {
+            if (!(leftType == Types.BOOL && rightType == null))
+              throw new SemanticException("Type mismatch: incompatible types '" + leftType + "' and '" + rightType + "' in operation at line "
+              + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ". Expression: " + _input.LT(1).getText());
+          }
+          leftType = rightType;
+          System.out.println("Expression value " + root.evaluate());
+          System.out.println(root.toJSON());
+      })*
+    ;
 
 termo returns [Types type]
-        : fator termol
-        ;
+    : fator {
+        $type = rightType;
+      }
+      termol[$type]
+    ;
 
-termol returns [Types type]
-         :
-            (OP_MUL | OP_DIV) {
-              strExpr += _input.LT(-1).getText();
-              BinaryExpression bin = new BinaryExpression(strExpr.charAt(0));
-              if (exprStack.peek() instanceof UnaryExpression){
-                bin.setLeft(exprStack.pop());
-              } else {
-                BinaryExpression father = (BinaryExpression)exprStack.pop();
-                if (father.getOperator() == '+' || father.getOperator() == '-'){
-                    bin.setLeft(father.getRight());
-                    father.setRight(bin);
-                } else {
-                    bin.setLeft(father);
-                    exprStack.push(bin);
-                }
-              }
-            }
-            fator {
-              strExpr += _input.LT(-1).getText();
-              bin.setRight(exprStack.pop());
-              exprStack.push(bin);
+termol[Types inheritedType] returns [Types type]
+    : ((OP_MUL | OP_DIV) {
+          strExpr += _input.LT(-1).getText();
+          BinaryExpression bin = new BinaryExpression(_input.LT(-1).getText().charAt(0));
+          bin.setLeft(exprStack.pop());
+          exprStack.push(bin);
+      }
+      fator {
+          strExpr += _input.LT(-1).getText();
+          AbstractExpression rightExpr = exprStack.pop();
+          BinaryExpression root = (BinaryExpression) exprStack.pop();
+          root.setRight(rightExpr);
+          exprStack.push(root);
 
-              if (leftType != rightType) {
-                  if (!(leftType == Types.BOOL && rightType == null))
-                   throw new SemanticException("Type mismatch: incompatible types '" + leftType + "' and '" + rightType + "' in operation at line "
-                   + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ". Expression: " + _input.LT(1).getText());
-              }
-              leftType = rightType;
-            }
-        ;
+          if (leftType != rightType) {
+            if (!(leftType == Types.BOOL && rightType == null))
+             throw new SemanticException("Type mismatch: incompatible types '" + leftType + "' and '" + rightType + "' in operation at line "
+             + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ". Expression: " + _input.LT(1).getText());
+          }
+          $type = rightType;
+          System.out.println("Expression value " + root.evaluate());
+          System.out.println(root.toJSON());
+      })*
+    ;
 
 fator returns [Types type]
     : ID  {
@@ -311,10 +310,9 @@ fator returns [Types type]
             rightType = symbolTable.get(_input.LT(-1).getText()).getType();
           }
     | NUM {
-        rightType = Types.NUMBER;
-        UnaryExpression element = new UnaryExpression(Double.parseDouble(_input.LT(-1).getText()));
-        exprStack.push(element);
-        }
+            exprStack.push(new UnaryExpression(Double.parseDouble($NUM.text)));
+            rightType = Types.NUMBER;
+          }
     | TEXTO { rightType = Types.TEXT; }
     | BOOL { rightType = Types.BOOL; }
     ;
@@ -381,8 +379,7 @@ exprList
         if (auxList.size() == 1 && leftType != Types.BOOL) {
             throw new SemanticException("Single expression '" + auxList.get(0) + "' in condition must be boolean at line " + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ".");
         }
-      }
-      )*
+      })*
     ;
 
 
@@ -407,7 +404,7 @@ OPREL       : '>' | '<' | '>=' | '<= ' | '<>' | '=='
 ID			: [a-z] ( [a-z] | [A-Z] | [0-9] )*
    ;
 
-NUM			: ('-')?[0-9]+ ('.' [0-9]+ )?
+NUM			: ('-')?[0-9]+('.'[0-9]+)?
    ;
 
 VIRG		: ','

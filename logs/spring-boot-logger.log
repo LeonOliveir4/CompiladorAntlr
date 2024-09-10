@@ -1164,3 +1164,501 @@ Identify and stop the process that's listening on port 8080 or configure this ap
 2024-09-09 18:45:22,539 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
 2024-09-09 18:45:22,540 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
 2024-09-09 18:45:22,624 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-2] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 19:38:50,417 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 34460 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 19:38:50,420 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 19:38:50,485 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 19:38:50,486 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 19:38:51,990 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 19:38:52,002 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 19:38:52,005 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 19:38:52,006 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 19:38:52,052 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 19:38:52,053 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1565 ms
+2024-09-09 19:38:53,155 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 19:38:53,174 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 19:38:53,260 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 19:38:53,290 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 19:38:53,312 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 3.577 seconds (process running for 4.148)
+2024-09-09 19:38:55,967 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 19:38:55,967 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2024-09-09 19:38:55,969 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 2 ms
+2024-09-09 19:38:55,979 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 19:38:55,979 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 19:38:56,033 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-1] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 19:40:53,428 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 27608 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 19:40:53,431 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 19:40:53,488 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 19:40:53,489 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 19:40:55,047 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 19:40:55,057 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 19:40:55,062 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 19:40:55,062 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 19:40:55,113 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 19:40:55,114 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1623 ms
+2024-09-09 19:40:56,199 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 19:40:56,215 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 19:40:56,293 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 19:40:56,319 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 19:40:56,340 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 3.519 seconds (process running for 4.077)
+2024-09-09 19:40:59,078 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 19:40:59,078 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2024-09-09 19:40:59,079 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
+2024-09-09 19:40:59,089 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 19:40:59,089 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 19:40:59,137 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-1] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 19:41:01,013 DEBUG b.i.Platform [http-nio-8080-exec-4] X-B3-TraceId was null
+2024-09-09 19:41:01,013 DEBUG b.i.Platform [http-nio-8080-exec-4] X-B3-TraceId was null
+2024-09-09 19:41:01,016 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-4] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 19:41:02,045 DEBUG b.i.Platform [http-nio-8080-exec-6] X-B3-TraceId was null
+2024-09-09 19:41:02,045 DEBUG b.i.Platform [http-nio-8080-exec-6] X-B3-TraceId was null
+2024-09-09 19:41:02,048 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-6] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 19:41:36,545 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 68 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 19:41:36,548 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 19:41:36,614 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 19:41:36,615 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 19:41:38,140 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 19:41:38,155 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 19:41:38,159 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 19:41:38,159 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 19:41:38,215 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 19:41:38,216 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1600 ms
+2024-09-09 19:41:39,331 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 19:41:39,350 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 19:41:39,431 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 19:41:39,458 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 19:41:39,479 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 3.549 seconds (process running for 4.167)
+2024-09-09 19:41:42,321 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 19:41:42,322 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2024-09-09 19:41:42,324 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
+2024-09-09 19:41:42,338 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 19:41:42,339 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 19:41:42,447 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-1] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 19:42:29,639 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 30404 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 19:42:29,645 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 19:42:29,735 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 19:42:29,736 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 19:42:31,294 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 19:42:31,306 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 19:42:31,310 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 19:42:31,310 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 19:42:31,355 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 19:42:31,356 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1619 ms
+2024-09-09 19:42:32,443 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 19:42:32,462 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 19:42:32,543 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 19:42:32,567 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 19:42:32,587 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 3.639 seconds (process running for 4.239)
+2024-09-09 19:42:40,590 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-3] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 19:42:40,590 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-3] Initializing Servlet 'dispatcherServlet'
+2024-09-09 19:42:40,592 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-3] Completed initialization in 2 ms
+2024-09-09 19:42:40,604 DEBUG b.i.Platform [http-nio-8080-exec-3] X-B3-TraceId was null
+2024-09-09 19:42:40,605 DEBUG b.i.Platform [http-nio-8080-exec-3] X-B3-TraceId was null
+2024-09-09 19:42:40,666 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-3] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 19:42:41,991 DEBUG b.i.Platform [http-nio-8080-exec-8] X-B3-TraceId was null
+2024-09-09 19:42:41,991 DEBUG b.i.Platform [http-nio-8080-exec-8] X-B3-TraceId was null
+2024-09-09 19:42:41,995 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-8] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 19:42:54,461 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 34844 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 19:42:54,464 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 19:42:54,517 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 19:42:54,518 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 19:42:56,146 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 19:42:56,162 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 19:42:56,167 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 19:42:56,168 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 19:42:56,223 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 19:42:56,225 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1705 ms
+2024-09-09 19:42:57,687 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 19:42:57,707 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 19:42:57,806 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 19:42:57,853 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 19:42:57,878 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 4.071 seconds (process running for 4.631)
+2024-09-09 19:43:04,361 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-3] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 19:43:04,361 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-3] Initializing Servlet 'dispatcherServlet'
+2024-09-09 19:43:04,363 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-3] Completed initialization in 2 ms
+2024-09-09 19:43:04,373 DEBUG b.i.Platform [http-nio-8080-exec-3] X-B3-TraceId was null
+2024-09-09 19:43:04,375 DEBUG b.i.Platform [http-nio-8080-exec-3] X-B3-TraceId was null
+2024-09-09 19:43:04,437 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-3] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 19:43:05,678 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 19:43:05,679 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 19:43:05,681 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-2] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 19:44:07,760 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 2444 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 19:44:07,764 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 19:44:07,847 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 19:44:07,847 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 19:44:09,564 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 19:44:09,580 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 19:44:09,586 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 19:44:09,587 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 19:44:09,658 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 19:44:09,660 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1810 ms
+2024-09-09 19:44:11,123 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 19:44:11,153 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 19:44:11,241 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 19:44:11,274 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 19:44:11,301 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 4.316 seconds (process running for 4.995)
+2024-09-09 19:44:13,669 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 19:44:13,670 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2024-09-09 19:44:13,671 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 1 ms
+2024-09-09 19:44:13,680 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 19:44:13,681 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 19:44:13,736 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-2] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 19:48:08,638 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 27164 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 19:48:08,641 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 19:48:08,715 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 19:48:08,715 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 19:48:10,270 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 19:48:10,282 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 19:48:10,287 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 19:48:10,287 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 19:48:10,331 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 19:48:10,333 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1616 ms
+2024-09-09 19:48:11,446 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 19:48:11,463 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 19:48:11,536 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 19:48:11,569 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 19:48:11,590 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 3.574 seconds (process running for 4.097)
+2024-09-09 19:48:16,435 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 19:48:16,436 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2024-09-09 19:48:16,438 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
+2024-09-09 19:48:16,452 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 19:48:16,453 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 19:48:16,522 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-1] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 20:03:38,744 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 30756 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 20:03:38,747 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 20:03:38,816 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 20:03:38,817 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 20:03:40,355 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 20:03:40,368 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:03:40,371 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 20:03:40,372 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 20:03:40,417 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 20:03:40,418 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1599 ms
+2024-09-09 20:03:41,842 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 20:03:41,861 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 20:03:41,938 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:03:41,971 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 20:03:41,990 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 3.874 seconds (process running for 4.407)
+2024-09-09 20:03:47,172 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 20:03:47,172 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2024-09-09 20:03:47,174 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 2 ms
+2024-09-09 20:03:47,190 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 20:03:47,191 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 20:03:47,269 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-1] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 20:04:31,515 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 16428 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 20:04:31,518 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 20:04:31,589 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 20:04:31,590 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 20:04:33,168 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 20:04:33,181 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:04:33,185 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 20:04:33,185 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 20:04:33,234 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 20:04:33,235 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1644 ms
+2024-09-09 20:04:34,620 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 20:04:34,641 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 20:04:34,732 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:04:34,757 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 20:04:34,781 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 3.879 seconds (process running for 4.454)
+2024-09-09 20:04:38,651 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 20:04:38,651 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2024-09-09 20:04:38,654 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 1 ms
+2024-09-09 20:04:38,667 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 20:04:38,667 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 20:04:38,735 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-2] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 20:05:26,675 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 28556 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 20:05:26,680 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 20:05:26,755 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 20:05:26,755 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 20:05:28,227 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 20:05:28,238 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:05:28,241 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 20:05:28,241 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 20:05:28,286 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 20:05:28,287 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1531 ms
+2024-09-09 20:05:29,410 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 20:05:29,425 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 20:05:29,490 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:05:29,518 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 20:05:29,543 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 3.535 seconds (process running for 4.182)
+2024-09-09 20:05:31,741 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 20:05:31,742 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2024-09-09 20:05:31,743 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 1 ms
+2024-09-09 20:05:31,756 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 20:05:31,757 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 20:05:31,831 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-2] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 20:14:38,771 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 26372 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 20:14:38,775 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 20:14:38,844 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 20:14:38,844 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 20:14:40,577 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 20:14:40,596 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:14:40,604 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 20:14:40,604 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 20:14:40,663 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 20:14:40,665 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1818 ms
+2024-09-09 20:14:42,150 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 20:14:42,168 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 20:14:42,250 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:14:42,273 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 20:14:42,295 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 4.139 seconds (process running for 4.687)
+2024-09-09 20:14:48,053 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 20:14:48,053 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2024-09-09 20:14:48,054 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 1 ms
+2024-09-09 20:14:48,063 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 20:14:48,063 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 20:14:48,139 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-2] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato c
+2024-09-09 20:15:02,705 DEBUG b.i.Platform [http-nio-8080-exec-3] X-B3-TraceId was null
+2024-09-09 20:15:02,706 DEBUG b.i.Platform [http-nio-8080-exec-3] X-B3-TraceId was null
+2024-09-09 20:15:02,711 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-3] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato java
+2024-09-09 20:16:09,485 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 30624 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 20:16:09,487 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 20:16:09,542 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 20:16:09,542 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 20:16:11,231 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 20:16:11,245 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:16:11,250 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 20:16:11,250 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 20:16:11,303 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 20:16:11,304 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1760 ms
+2024-09-09 20:16:12,466 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 20:16:12,481 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 20:16:12,549 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:16:12,581 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 20:16:12,600 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 3.783 seconds (process running for 4.346)
+2024-09-09 20:16:18,466 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 20:16:18,466 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2024-09-09 20:16:18,468 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 2 ms
+2024-09-09 20:16:18,481 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 20:16:18,482 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 20:16:18,537 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-1] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato java
+2024-09-09 20:17:38,959 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 38072 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 20:17:38,963 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 20:17:39,038 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 20:17:39,038 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 20:17:40,527 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 20:17:40,539 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:17:40,543 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 20:17:40,543 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 20:17:40,589 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 20:17:40,590 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1550 ms
+2024-09-09 20:17:42,114 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 20:17:42,144 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 20:17:42,292 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:17:42,357 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 20:17:42,394 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 4.081 seconds (process running for 4.609)
+2024-09-09 20:17:44,624 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 20:17:44,624 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2024-09-09 20:17:44,626 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 1 ms
+2024-09-09 20:17:44,635 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 20:17:44,635 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 20:17:44,693 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-2] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato java
+2024-09-09 20:19:20,896 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 34944 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 20:19:20,899 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 20:19:20,962 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 20:19:20,962 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 20:19:22,573 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 20:19:22,586 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:19:22,590 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 20:19:22,591 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 20:19:22,637 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 20:19:22,638 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1674 ms
+2024-09-09 20:19:23,812 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 20:19:23,833 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 20:19:23,914 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:19:23,952 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 20:19:23,974 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 3.766 seconds (process running for 4.312)
+2024-09-09 20:19:27,746 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 20:19:27,747 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2024-09-09 20:19:27,749 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 2 ms
+2024-09-09 20:19:27,757 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 20:19:27,758 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 20:19:27,818 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-2] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato java
+2024-09-09 20:27:08,295 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 29368 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 20:27:08,298 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 20:27:08,355 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 20:27:08,356 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 20:27:10,129 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 20:27:10,145 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:27:10,158 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 20:27:10,159 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 20:27:10,215 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 20:27:10,216 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1859 ms
+2024-09-09 20:27:11,835 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 20:27:11,859 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 20:27:11,993 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:27:12,056 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 20:27:12,099 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 4.422 seconds (process running for 4.982)
+2024-09-09 20:27:15,139 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 20:27:15,139 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2024-09-09 20:27:15,142 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 2 ms
+2024-09-09 20:27:15,159 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 20:27:15,160 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 20:27:15,234 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-1] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato java
+2024-09-09 20:31:51,463 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 10176 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 20:31:51,467 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 20:31:51,541 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 20:31:51,541 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 20:31:53,340 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 20:31:53,355 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:31:53,358 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 20:31:53,358 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 20:31:53,402 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 20:31:53,403 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1860 ms
+2024-09-09 20:31:54,843 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 20:31:54,867 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 20:31:54,955 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:31:54,976 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 20:31:54,993 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 4.283 seconds (process running for 4.861)
+2024-09-09 20:31:58,043 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 20:31:58,043 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2024-09-09 20:31:58,045 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
+2024-09-09 20:31:58,054 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 20:31:58,055 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 20:31:58,101 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-1] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato java
+2024-09-09 20:43:19,610 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 32824 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 20:43:19,613 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 20:43:19,698 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 20:43:19,698 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 20:43:21,377 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 20:43:21,389 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:43:21,393 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 20:43:21,393 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 20:43:21,443 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 20:43:21,444 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1744 ms
+2024-09-09 20:43:23,023 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 20:43:23,044 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 20:43:23,151 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:43:23,177 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 20:43:23,204 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 4.283 seconds (process running for 4.853)
+2024-09-09 20:43:28,877 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 20:43:28,879 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2024-09-09 20:43:28,880 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 1 ms
+2024-09-09 20:43:28,894 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 20:43:28,895 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 20:43:28,966 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-2] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato java
+2024-09-09 20:53:21,848 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 1560 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 20:53:21,851 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 20:53:21,923 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 20:53:21,924 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 20:53:24,672 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 20:53:24,694 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:53:24,699 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 20:53:24,700 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 20:53:24,767 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 20:53:24,769 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 2843 ms
+2024-09-09 20:53:26,673 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 20:53:26,700 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 20:53:26,811 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 20:53:26,864 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 20:53:26,929 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 5.864 seconds (process running for 6.497)
+2024-09-09 20:53:33,690 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 20:53:33,691 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2024-09-09 20:53:33,693 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 2 ms
+2024-09-09 20:53:33,702 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 20:53:33,703 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 20:53:33,775 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-2] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato java
+2024-09-09 21:14:23,928 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 20004 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 21:14:23,930 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 21:14:24,027 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 21:14:24,028 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 21:14:25,805 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 21:14:25,822 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 21:14:25,826 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 21:14:25,827 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 21:14:25,877 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 21:14:25,878 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1849 ms
+2024-09-09 21:14:27,697 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 21:14:27,751 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 21:14:27,881 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 21:14:27,982 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 21:14:28,014 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 4.786 seconds (process running for 5.336)
+2024-09-09 21:14:30,537 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 21:14:30,538 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2024-09-09 21:14:30,539 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 1 ms
+2024-09-09 21:14:30,550 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 21:14:30,550 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 21:14:30,621 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-2] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato java
+2024-09-09 21:23:02,224 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 34312 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 21:23:02,227 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 21:23:02,327 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 21:23:02,328 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 21:23:04,646 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 21:23:04,663 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 21:23:04,669 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 21:23:04,670 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 21:23:04,737 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 21:23:04,738 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 2410 ms
+2024-09-09 21:23:07,326 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 21:23:07,372 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 21:23:07,546 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 21:23:07,611 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 21:23:07,671 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 6.329 seconds (process running for 7.039)
+2024-09-09 21:23:09,363 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 21:23:09,363 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2024-09-09 21:23:09,364 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 1 ms
+2024-09-09 21:23:09,374 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 21:23:09,374 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 21:23:09,428 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-2] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato java
+2024-09-09 21:25:11,161 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 11852 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 21:25:11,164 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 21:25:11,228 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 21:25:11,228 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 21:25:12,956 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 21:25:12,968 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 21:25:12,971 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 21:25:12,971 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 21:25:13,013 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 21:25:13,015 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1785 ms
+2024-09-09 21:25:14,428 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 21:25:14,448 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 21:25:14,537 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 21:25:14,568 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 21:25:14,599 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 4.146 seconds (process running for 4.747)
+2024-09-09 21:25:18,140 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 21:25:18,141 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2024-09-09 21:25:18,143 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 2 ms
+2024-09-09 21:25:18,153 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 21:25:18,153 DEBUG b.i.Platform [http-nio-8080-exec-1] X-B3-TraceId was null
+2024-09-09 21:25:18,229 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-1] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato java
+2024-09-09 21:26:28,050 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 39820 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 21:26:28,052 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 21:26:28,159 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 21:26:28,160 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 21:26:29,794 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 21:26:29,804 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 21:26:29,809 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 21:26:29,809 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 21:26:29,848 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 21:26:29,849 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1688 ms
+2024-09-09 21:26:31,100 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 21:26:31,120 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 21:26:31,200 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 21:26:31,230 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 21:26:31,252 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 3.825 seconds (process running for 4.394)
+2024-09-09 21:26:35,511 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 21:26:35,511 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2024-09-09 21:26:35,512 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 1 ms
+2024-09-09 21:26:35,524 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 21:26:35,524 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 21:26:35,605 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-2] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato java
+2024-09-09 21:29:33,489 INFO o.s.b.StartupInfoLogger [restartedMain] Starting PtBrLangCompilerApplication using Java 21.0.4 with PID 41052 (C:\Users\mb_la\projetos-java\PtBrLangCompiler\target\classes started by MBLABS in C:\Users\mb_la\projetos-java\PtBrLangCompiler)
+2024-09-09 21:29:33,492 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2024-09-09 21:29:33,556 INFO o.s.b.l.DeferredLog [restartedMain] Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-09-09 21:29:33,556 INFO o.s.b.l.DeferredLog [restartedMain] For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-09-09 21:29:35,057 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat initialized with port 8080 (http)
+2024-09-09 21:29:35,070 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing ProtocolHandler ["http-nio-8080"]
+2024-09-09 21:29:35,074 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting service [Tomcat]
+2024-09-09 21:29:35,074 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting Servlet engine: [Apache Tomcat/10.1.28]
+2024-09-09 21:29:35,114 INFO o.a.j.l.DirectJDKLog [restartedMain] Initializing Spring embedded WebApplicationContext
+2024-09-09 21:29:35,115 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [restartedMain] Root WebApplicationContext: initialization completed in 1557 ms
+2024-09-09 21:29:36,201 INFO o.s.b.d.a.OptionalLiveReloadServer [restartedMain] LiveReload server is running on port 35729
+2024-09-09 21:29:36,216 INFO o.s.b.a.e.w.EndpointLinksResolver [restartedMain] Exposing 1 endpoint beneath base path '/actuator'
+2024-09-09 21:29:36,278 INFO o.a.j.l.DirectJDKLog [restartedMain] Starting ProtocolHandler ["http-nio-8080"]
+2024-09-09 21:29:36,302 INFO o.s.b.w.e.t.TomcatWebServer [restartedMain] Tomcat started on port 8080 (http) with context path '/api'
+2024-09-09 21:29:36,320 INFO o.s.b.StartupInfoLogger [restartedMain] Started PtBrLangCompilerApplication in 3.448 seconds (process running for 4.018)
+2024-09-09 21:29:38,640 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-09-09 21:29:38,641 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Initializing Servlet 'dispatcherServlet'
+2024-09-09 21:29:38,642 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-2] Completed initialization in 1 ms
+2024-09-09 21:29:38,651 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 21:29:38,652 DEBUG b.i.Platform [http-nio-8080-exec-2] X-B3-TraceId was null
+2024-09-09 21:29:38,700 INFO c.c.p.f.a.i.CompilerAdapter [http-nio-8080-exec-2] Iniciando conversão de arquivo testeComBooleanos.ptbrlang para o formato java

@@ -125,7 +125,7 @@ public class PtBrLangGrammarParser extends Parser {
 	    private Stack<AbstractExpression> exprStack = new Stack<AbstractExpression>();
 	    private AbstractExpression top = null;
 
-	    public Double generateValue(){
+	    public double generateValue(){
 	        if (top == null){
 	            top = exprStack.pop();
 	        }
@@ -805,6 +805,7 @@ public class PtBrLangGrammarParser extends Parser {
 			expr();
 
 			      atribCommand.setExprString(strExpr);
+
 			                  if (strOp.equalsIgnoreCase("++") || strOp.equalsIgnoreCase("--")) {
 			       System.out.println("Left  Side Expression Type = "+leftType);
 			       if (leftType != Types.NUMBER){
@@ -986,19 +987,11 @@ public class PtBrLangGrammarParser extends Parser {
 			setState(164);
 			termo();
 
-			            strExpr += _input.LT(-1).getText();
-			            ((ExprContext)_localctx).type =  rightType;
-			        
-			setState(167);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
-			case 1:
-				{
-				setState(166);
-				exprl();
-				}
-				break;
-			}
+			        strExpr += _input.LT(-1).getText();
+			        ((ExprContext)_localctx).type =  rightType;
+			      
+			setState(166);
+			exprl();
 			}
 		}
 		catch (RecognitionException re) {
@@ -1050,13 +1043,13 @@ public class PtBrLangGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(176);
+			setState(175);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==OP_SUM || _la==OP_SUB) {
 				{
 				{
-				setState(169);
+				setState(168);
 				_la = _input.LA(1);
 				if ( !(_la==OP_SUM || _la==OP_SUB) ) {
 				_errHandler.recoverInline(this);
@@ -1067,30 +1060,32 @@ public class PtBrLangGrammarParser extends Parser {
 					consume();
 				}
 
-				                strExpr += _input.LT(-1).getText();
-				                BinaryExpression bin = new BinaryExpression(strExpr.charAt(0));
-				                bin.setLeft(exprStack.pop());
-				                exprStack.push(bin);
-				              
-				setState(171);
+				          strExpr += _input.LT(-1).getText();
+				          BinaryExpression bin = new BinaryExpression(_input.LT(-1).getText().charAt(0));
+				          bin.setLeft(exprStack.pop());
+				          exprStack.push(bin);
+				      
+				setState(170);
 				termo();
 
-				                strExpr += _input.LT(-1).getText();
-				                AbstractExpression top = exprStack.pop();
-				                BinaryExpression root = (BinaryExpression)exprStack.pop();
-				                root.setRight(top);
-				                exprStack.push(root);
+				          strExpr += _input.LT(-1).getText();
+				          AbstractExpression top = exprStack.pop();
+				          BinaryExpression root = (BinaryExpression)exprStack.pop();
+				          root.setRight(top);
+				          exprStack.push(root);
 
-				                if (leftType != rightType) {
-				                    if (!(leftType == Types.BOOL && rightType == null))
-				                     throw new SemanticException("Type mismatch: incompatible types '" + leftType + "' and '" + rightType + "' in operation at line "
-				                     + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ". Expression: " + _input.LT(1).getText());
-				                }
-				                leftType = rightType;
-				              
+				          if (leftType != rightType) {
+				            if (!(leftType == Types.BOOL && rightType == null))
+				              throw new SemanticException("Type mismatch: incompatible types '" + leftType + "' and '" + rightType + "' in operation at line "
+				              + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ". Expression: " + _input.LT(1).getText());
+				          }
+				          leftType = rightType;
+				          System.out.println("Expression value " + root.evaluate());
+				          System.out.println(root.toJSON());
+				      
 				}
 				}
-				setState(178);
+				setState(177);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1136,10 +1131,13 @@ public class PtBrLangGrammarParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(179);
+			setState(178);
 			fator();
+
+			        ((TermoContext)_localctx).type =  rightType;
+			      
 			setState(180);
-			termol();
+			termol(_localctx.type);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1155,6 +1153,7 @@ public class PtBrLangGrammarParser extends Parser {
 
 	@SuppressWarnings("CheckReturnValue")
 	public static class TermolContext extends ParserRuleContext {
+		public Types inheritedType;
 		public Types type;
 		public List<FatorContext> fator() {
 			return getRuleContexts(FatorContext.class);
@@ -1170,8 +1169,10 @@ public class PtBrLangGrammarParser extends Parser {
 		public TerminalNode OP_DIV(int i) {
 			return getToken(PtBrLangGrammarParser.OP_DIV, i);
 		}
-		public TermolContext(ParserRuleContext parent, int invokingState) {
+		public TermolContext(ParserRuleContext parent, int invokingState) { super(parent, invokingState); }
+		public TermolContext(ParserRuleContext parent, int invokingState, Types inheritedType) {
 			super(parent, invokingState);
+			this.inheritedType = inheritedType;
 		}
 		@Override public int getRuleIndex() { return RULE_termol; }
 		@Override
@@ -1184,8 +1185,8 @@ public class PtBrLangGrammarParser extends Parser {
 		}
 	}
 
-	public final TermolContext termol() throws RecognitionException {
-		TermolContext _localctx = new TermolContext(_ctx, getState());
+	public final TermolContext termol(Types inheritedType) throws RecognitionException {
+		TermolContext _localctx = new TermolContext(_ctx, getState(), inheritedType);
 		enterRule(_localctx, 24, RULE_termol);
 		int _la;
 		try {
@@ -1208,35 +1209,29 @@ public class PtBrLangGrammarParser extends Parser {
 					consume();
 				}
 
-				              strExpr += _input.LT(-1).getText();
-				              BinaryExpression bin = new BinaryExpression(strExpr.charAt(0));
-				              if (exprStack.peek() instanceof UnaryExpression){
-				                bin.setLeft(exprStack.pop());
-				              } else {
-				                BinaryExpression father = (BinaryExpression)exprStack.pop();
-				                if (father.getOperator() == '+' || father.getOperator() == '-'){
-				                    bin.setLeft(father.getRight());
-				                    father.setRight(bin);
-				                } else {
-				                    bin.setLeft(father);
-				                    exprStack.push(bin);
-				                }
-				              }
-				            
+				          strExpr += _input.LT(-1).getText();
+				          BinaryExpression bin = new BinaryExpression(_input.LT(-1).getText().charAt(0));
+				          bin.setLeft(exprStack.pop());
+				          exprStack.push(bin);
+				      
 				setState(184);
 				fator();
 
-				              strExpr += _input.LT(-1).getText();
-				              bin.setRight(exprStack.pop());
-				              exprStack.push(bin);
+				          strExpr += _input.LT(-1).getText();
+				          AbstractExpression rightExpr = exprStack.pop();
+				          BinaryExpression root = (BinaryExpression) exprStack.pop();
+				          root.setRight(rightExpr);
+				          exprStack.push(root);
 
-				              if (leftType != rightType) {
-				                  if (!(leftType == Types.BOOL && rightType == null))
-				                   throw new SemanticException("Type mismatch: incompatible types '" + leftType + "' and '" + rightType + "' in operation at line "
-				                   + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ". Expression: " + _input.LT(1).getText());
-				              }
-				              leftType = rightType;
-				            
+				          if (leftType != rightType) {
+				            if (!(leftType == Types.BOOL && rightType == null))
+				             throw new SemanticException("Type mismatch: incompatible types '" + leftType + "' and '" + rightType + "' in operation at line "
+				             + _input.LT(1).getLine() + ", column " + _input.LT(1).getCharPositionInLine() + ". Expression: " + _input.LT(1).getText());
+				          }
+				          ((TermolContext)_localctx).type =  rightType;
+				          System.out.println("Expression value " + root.evaluate());
+				          System.out.println(root.toJSON());
+				      
 				}
 				}
 				setState(191);
@@ -1259,6 +1254,7 @@ public class PtBrLangGrammarParser extends Parser {
 	@SuppressWarnings("CheckReturnValue")
 	public static class FatorContext extends ParserRuleContext {
 		public Types type;
+		public Token NUM;
 		public TerminalNode ID() { return getToken(PtBrLangGrammarParser.ID, 0); }
 		public TerminalNode NUM() { return getToken(PtBrLangGrammarParser.NUM, 0); }
 		public TerminalNode TEXTO() { return getToken(PtBrLangGrammarParser.TEXTO, 0); }
@@ -1304,12 +1300,11 @@ public class PtBrLangGrammarParser extends Parser {
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(194);
-				match(NUM);
+				((FatorContext)_localctx).NUM = match(NUM);
 
-				        rightType = Types.NUMBER;
-				        UnaryExpression element = new UnaryExpression(Double.parseDouble(_input.LT(-1).getText()));
-				        exprStack.push(element);
-				        
+				            exprStack.push(new UnaryExpression(Double.parseDouble((((FatorContext)_localctx).NUM!=null?((FatorContext)_localctx).NUM.getText():null))));
+				            rightType = Types.NUMBER;
+				          
 				}
 				break;
 			case TEXTO:
@@ -1473,7 +1468,7 @@ public class PtBrLangGrammarParser extends Parser {
 					        
 					setState(224);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,15,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,14,_ctx) ) {
 					case 1:
 						{
 						setState(219);
@@ -1553,8 +1548,8 @@ public class PtBrLangGrammarParser extends Parser {
 		"\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0006\u0001\u0007"+
 		"\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007\u0001\u0007"+
 		"\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001\b\u0001"+
-		"\b\u0001\t\u0001\t\u0001\t\u0003\t\u00a8\b\t\u0001\n\u0001\n\u0001\n\u0001"+
-		"\n\u0001\n\u0005\n\u00af\b\n\n\n\f\n\u00b2\t\n\u0001\u000b\u0001\u000b"+
+		"\b\u0001\t\u0001\t\u0001\t\u0001\t\u0001\n\u0001\n\u0001\n\u0001\n\u0001"+
+		"\n\u0005\n\u00ae\b\n\n\n\f\n\u00b1\t\n\u0001\u000b\u0001\u000b\u0001\u000b"+
 		"\u0001\u000b\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0005\f\u00bc\b\f"+
 		"\n\f\f\f\u00bf\t\f\u0001\r\u0001\r\u0001\r\u0001\r\u0001\r\u0001\r\u0001"+
 		"\r\u0001\r\u0003\r\u00c9\b\r\u0001\u000e\u0001\u000e\u0001\u000e\u0001"+
@@ -1564,13 +1559,13 @@ public class PtBrLangGrammarParser extends Parser {
 		"\u000e\u0003\u000e\u00e1\b\u000e\u0001\u000e\u0001\u000e\u0005\u000e\u00e5"+
 		"\b\u000e\n\u000e\f\u000e\u00e8\t\u000e\u0001\u000e\u0000\u0000\u000f\u0000"+
 		"\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c"+
-		"\u0000\u0002\u0001\u0000\u0012\u0013\u0001\u0000\u0014\u0015\u00f3\u0000"+
+		"\u0000\u0002\u0001\u0000\u0012\u0013\u0001\u0000\u0014\u0015\u00f2\u0000"+
 		"\u001e\u0001\u0000\u0000\u0000\u00020\u0001\u0000\u0000\u0000\u0004N\u0001"+
 		"\u0000\u0000\u0000\u0006P\u0001\u0000\u0000\u0000\bk\u0001\u0000\u0000"+
 		"\u0000\n{\u0001\u0000\u0000\u0000\f\u008c\u0001\u0000\u0000\u0000\u000e"+
 		"\u0094\u0001\u0000\u0000\u0000\u0010\u009b\u0001\u0000\u0000\u0000\u0012"+
-		"\u00a4\u0001\u0000\u0000\u0000\u0014\u00b0\u0001\u0000\u0000\u0000\u0016"+
-		"\u00b3\u0001\u0000\u0000\u0000\u0018\u00bd\u0001\u0000\u0000\u0000\u001a"+
+		"\u00a4\u0001\u0000\u0000\u0000\u0014\u00af\u0001\u0000\u0000\u0000\u0016"+
+		"\u00b2\u0001\u0000\u0000\u0000\u0018\u00bd\u0001\u0000\u0000\u0000\u001a"+
 		"\u00c8\u0001\u0000\u0000\u0000\u001c\u00ca\u0001\u0000\u0000\u0000\u001e"+
 		"\u001f\u0005\u0001\u0000\u0000\u001f \u0005$\u0000\u0000 \"\u0006\u0000"+
 		"\uffff\uffff\u0000!#\u0003\u0002\u0001\u0000\"!\u0001\u0000\u0000\u0000"+
@@ -1634,47 +1629,46 @@ public class PtBrLangGrammarParser extends Parser {
 		"\u00a0\u0001\u0000\u0000\u0000\u00a0\u00a1\u0005\u001d\u0000\u0000\u00a1"+
 		"\u00a2\u0005\u001b\u0000\u0000\u00a2\u00a3\u0006\b\uffff\uffff\u0000\u00a3"+
 		"\u0011\u0001\u0000\u0000\u0000\u00a4\u00a5\u0003\u0016\u000b\u0000\u00a5"+
-		"\u00a7\u0006\t\uffff\uffff\u0000\u00a6\u00a8\u0003\u0014\n\u0000\u00a7"+
-		"\u00a6\u0001\u0000\u0000\u0000\u00a7\u00a8\u0001\u0000\u0000\u0000\u00a8"+
-		"\u0013\u0001\u0000\u0000\u0000\u00a9\u00aa\u0007\u0000\u0000\u0000\u00aa"+
-		"\u00ab\u0006\n\uffff\uffff\u0000\u00ab\u00ac\u0003\u0016\u000b\u0000\u00ac"+
-		"\u00ad\u0006\n\uffff\uffff\u0000\u00ad\u00af\u0001\u0000\u0000\u0000\u00ae"+
-		"\u00a9\u0001\u0000\u0000\u0000\u00af\u00b2\u0001\u0000\u0000\u0000\u00b0"+
-		"\u00ae\u0001\u0000\u0000\u0000\u00b0\u00b1\u0001\u0000\u0000\u0000\u00b1"+
-		"\u0015\u0001\u0000\u0000\u0000\u00b2\u00b0\u0001\u0000\u0000\u0000\u00b3"+
-		"\u00b4\u0003\u001a\r\u0000\u00b4\u00b5\u0003\u0018\f\u0000\u00b5\u0017"+
-		"\u0001\u0000\u0000\u0000\u00b6\u00b7\u0007\u0001\u0000\u0000\u00b7\u00b8"+
-		"\u0006\f\uffff\uffff\u0000\u00b8\u00b9\u0003\u001a\r\u0000\u00b9\u00ba"+
-		"\u0006\f\uffff\uffff\u0000\u00ba\u00bc\u0001\u0000\u0000\u0000\u00bb\u00b6"+
-		"\u0001\u0000\u0000\u0000\u00bc\u00bf\u0001\u0000\u0000\u0000\u00bd\u00bb"+
-		"\u0001\u0000\u0000\u0000\u00bd\u00be\u0001\u0000\u0000\u0000\u00be\u0019"+
-		"\u0001\u0000\u0000\u0000\u00bf\u00bd\u0001\u0000\u0000\u0000\u00c0\u00c1"+
-		"\u0005\u0018\u0000\u0000\u00c1\u00c9\u0006\r\uffff\uffff\u0000\u00c2\u00c3"+
-		"\u0005\u0019\u0000\u0000\u00c3\u00c9\u0006\r\uffff\uffff\u0000\u00c4\u00c5"+
-		"\u0005!\u0000\u0000\u00c5\u00c9\u0006\r\uffff\uffff\u0000\u00c6\u00c7"+
-		"\u0005#\u0000\u0000\u00c7\u00c9\u0006\r\uffff\uffff\u0000\u00c8\u00c0"+
-		"\u0001\u0000\u0000\u0000\u00c8\u00c2\u0001\u0000\u0000\u0000\u00c8\u00c4"+
-		"\u0001\u0000\u0000\u0000\u00c8\u00c6\u0001\u0000\u0000\u0000\u00c9\u001b"+
-		"\u0001\u0000\u0000\u0000\u00ca\u00cb\u0006\u000e\uffff\uffff\u0000\u00cb"+
-		"\u00cc\u0003\u0012\t\u0000\u00cc\u00e6\u0006\u000e\uffff\uffff\u0000\u00cd"+
-		"\u00ce\u0005\u0017\u0000\u0000\u00ce\u00cf\u0006\u000e\uffff\uffff\u0000"+
-		"\u00cf\u00d0\u0003\u0012\t\u0000\u00d0\u00d1\u0006\u000e\uffff\uffff\u0000"+
-		"\u00d1\u00d2\u0001\u0000\u0000\u0000\u00d2\u00d3\u0006\u000e\uffff\uffff"+
-		"\u0000\u00d3\u00e5\u0001\u0000\u0000\u0000\u00d4\u00d7\u0005\u001f\u0000"+
-		"\u0000\u00d5\u00d7\u0005 \u0000\u0000\u00d6\u00d4\u0001\u0000\u0000\u0000"+
-		"\u00d6\u00d5\u0001\u0000\u0000\u0000\u00d7\u00d8\u0001\u0000\u0000\u0000"+
-		"\u00d8\u00d9\u0006\u000e\uffff\uffff\u0000\u00d9\u00da\u0003\u0012\t\u0000"+
-		"\u00da\u00e0\u0006\u000e\uffff\uffff\u0000\u00db\u00dc\u0005\u0017\u0000"+
-		"\u0000\u00dc\u00dd\u0006\u000e\uffff\uffff\u0000\u00dd\u00de\u0003\u0012"+
-		"\t\u0000\u00de\u00df\u0006\u000e\uffff\uffff\u0000\u00df\u00e1\u0001\u0000"+
-		"\u0000\u0000\u00e0\u00db\u0001\u0000\u0000\u0000\u00e0\u00e1\u0001\u0000"+
-		"\u0000\u0000\u00e1\u00e2\u0001\u0000\u0000\u0000\u00e2\u00e3\u0006\u000e"+
-		"\uffff\uffff\u0000\u00e3\u00e5\u0001\u0000\u0000\u0000\u00e4\u00cd\u0001"+
-		"\u0000\u0000\u0000\u00e4\u00d6\u0001\u0000\u0000\u0000\u00e5\u00e8\u0001"+
-		"\u0000\u0000\u0000\u00e6\u00e4\u0001\u0000\u0000\u0000\u00e6\u00e7\u0001"+
-		"\u0000\u0000\u0000\u00e7\u001d\u0001\u0000\u0000\u0000\u00e8\u00e6\u0001"+
-		"\u0000\u0000\u0000\u0012$*9CNZbfu\u0080\u00a7\u00b0\u00bd\u00c8\u00d6"+
-		"\u00e0\u00e4\u00e6";
+		"\u00a6\u0006\t\uffff\uffff\u0000\u00a6\u00a7\u0003\u0014\n\u0000\u00a7"+
+		"\u0013\u0001\u0000\u0000\u0000\u00a8\u00a9\u0007\u0000\u0000\u0000\u00a9"+
+		"\u00aa\u0006\n\uffff\uffff\u0000\u00aa\u00ab\u0003\u0016\u000b\u0000\u00ab"+
+		"\u00ac\u0006\n\uffff\uffff\u0000\u00ac\u00ae\u0001\u0000\u0000\u0000\u00ad"+
+		"\u00a8\u0001\u0000\u0000\u0000\u00ae\u00b1\u0001\u0000\u0000\u0000\u00af"+
+		"\u00ad\u0001\u0000\u0000\u0000\u00af\u00b0\u0001\u0000\u0000\u0000\u00b0"+
+		"\u0015\u0001\u0000\u0000\u0000\u00b1\u00af\u0001\u0000\u0000\u0000\u00b2"+
+		"\u00b3\u0003\u001a\r\u0000\u00b3\u00b4\u0006\u000b\uffff\uffff\u0000\u00b4"+
+		"\u00b5\u0003\u0018\f\u0000\u00b5\u0017\u0001\u0000\u0000\u0000\u00b6\u00b7"+
+		"\u0007\u0001\u0000\u0000\u00b7\u00b8\u0006\f\uffff\uffff\u0000\u00b8\u00b9"+
+		"\u0003\u001a\r\u0000\u00b9\u00ba\u0006\f\uffff\uffff\u0000\u00ba\u00bc"+
+		"\u0001\u0000\u0000\u0000\u00bb\u00b6\u0001\u0000\u0000\u0000\u00bc\u00bf"+
+		"\u0001\u0000\u0000\u0000\u00bd\u00bb\u0001\u0000\u0000\u0000\u00bd\u00be"+
+		"\u0001\u0000\u0000\u0000\u00be\u0019\u0001\u0000\u0000\u0000\u00bf\u00bd"+
+		"\u0001\u0000\u0000\u0000\u00c0\u00c1\u0005\u0018\u0000\u0000\u00c1\u00c9"+
+		"\u0006\r\uffff\uffff\u0000\u00c2\u00c3\u0005\u0019\u0000\u0000\u00c3\u00c9"+
+		"\u0006\r\uffff\uffff\u0000\u00c4\u00c5\u0005!\u0000\u0000\u00c5\u00c9"+
+		"\u0006\r\uffff\uffff\u0000\u00c6\u00c7\u0005#\u0000\u0000\u00c7\u00c9"+
+		"\u0006\r\uffff\uffff\u0000\u00c8\u00c0\u0001\u0000\u0000\u0000\u00c8\u00c2"+
+		"\u0001\u0000\u0000\u0000\u00c8\u00c4\u0001\u0000\u0000\u0000\u00c8\u00c6"+
+		"\u0001\u0000\u0000\u0000\u00c9\u001b\u0001\u0000\u0000\u0000\u00ca\u00cb"+
+		"\u0006\u000e\uffff\uffff\u0000\u00cb\u00cc\u0003\u0012\t\u0000\u00cc\u00e6"+
+		"\u0006\u000e\uffff\uffff\u0000\u00cd\u00ce\u0005\u0017\u0000\u0000\u00ce"+
+		"\u00cf\u0006\u000e\uffff\uffff\u0000\u00cf\u00d0\u0003\u0012\t\u0000\u00d0"+
+		"\u00d1\u0006\u000e\uffff\uffff\u0000\u00d1\u00d2\u0001\u0000\u0000\u0000"+
+		"\u00d2\u00d3\u0006\u000e\uffff\uffff\u0000\u00d3\u00e5\u0001\u0000\u0000"+
+		"\u0000\u00d4\u00d7\u0005\u001f\u0000\u0000\u00d5\u00d7\u0005 \u0000\u0000"+
+		"\u00d6\u00d4\u0001\u0000\u0000\u0000\u00d6\u00d5\u0001\u0000\u0000\u0000"+
+		"\u00d7\u00d8\u0001\u0000\u0000\u0000\u00d8\u00d9\u0006\u000e\uffff\uffff"+
+		"\u0000\u00d9\u00da\u0003\u0012\t\u0000\u00da\u00e0\u0006\u000e\uffff\uffff"+
+		"\u0000\u00db\u00dc\u0005\u0017\u0000\u0000\u00dc\u00dd\u0006\u000e\uffff"+
+		"\uffff\u0000\u00dd\u00de\u0003\u0012\t\u0000\u00de\u00df\u0006\u000e\uffff"+
+		"\uffff\u0000\u00df\u00e1\u0001\u0000\u0000\u0000\u00e0\u00db\u0001\u0000"+
+		"\u0000\u0000\u00e0\u00e1\u0001\u0000\u0000\u0000\u00e1\u00e2\u0001\u0000"+
+		"\u0000\u0000\u00e2\u00e3\u0006\u000e\uffff\uffff\u0000\u00e3\u00e5\u0001"+
+		"\u0000\u0000\u0000\u00e4\u00cd\u0001\u0000\u0000\u0000\u00e4\u00d6\u0001"+
+		"\u0000\u0000\u0000\u00e5\u00e8\u0001\u0000\u0000\u0000\u00e6\u00e4\u0001"+
+		"\u0000\u0000\u0000\u00e6\u00e7\u0001\u0000\u0000\u0000\u00e7\u001d\u0001"+
+		"\u0000\u0000\u0000\u00e8\u00e6\u0001\u0000\u0000\u0000\u0011$*9CNZbfu"+
+		"\u0080\u00af\u00bd\u00c8\u00d6\u00e0\u00e4\u00e6";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

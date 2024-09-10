@@ -117,7 +117,7 @@ public class PtBrLangGrammarLexer extends Lexer {
 	    private Stack<AbstractExpression> exprStack = new Stack<AbstractExpression>();
 	    private AbstractExpression top = null;
 
-	    public Double generateValue(){
+	    public double generateValue(){
 	        if (top == null){
 	            top = exprStack.pop();
 	        }

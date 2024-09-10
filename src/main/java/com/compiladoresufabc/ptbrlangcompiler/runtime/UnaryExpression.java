@@ -21,7 +21,7 @@ public class UnaryExpression extends AbstractExpression {
     }
 
     @Override
-    public Double evaluate() {
+    public double evaluate() {
         return value;
     }
 

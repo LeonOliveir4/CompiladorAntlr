@@ -46,7 +46,10 @@ public class BinaryExpression extends AbstractExpression {
     }
 
     @Override
-    public Double evaluate() {
+    public double evaluate() {
+        if (this.left == null || this.right == null) {
+            return 0.0;
+        }
         return switch (this.operator) {
             case '+' -> this.left.evaluate() + this.right.evaluate();
             case '-' -> this.left.evaluate() - this.right.evaluate();
@@ -60,8 +63,8 @@ public class BinaryExpression extends AbstractExpression {
     public String toJSON() {
         return "{" +
                 "\"operator\": \"" + this.operator + "\", " +
-                "\"left\": " + this.left.toJSON() + ", " +
-                "\"right\": " + this.right.toJSON() +
+                "\"left\": " + (this.left != null ? this.left.toJSON() : "null") + ", " +
+                "\"right\": " + (this.right != null ? this.right.toJSON() : "null") +
                 "}";
     }
 }
