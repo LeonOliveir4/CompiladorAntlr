@@ -11,6 +11,8 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.DefaultErrorStrategy;
 import org.antlr.v4.runtime.RecognitionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpHeaders;
@@ -25,9 +27,12 @@ import com.compiladoresufabc.ptbrlangcompiler.commons.enums.LanguageType;
 import com.compiladoresufabc.ptbrlangcompiler.commons.errors.SemanticException;
 import com.compiladoresufabc.ptbrlangcompiler.commons.errors.SyntaxErrorListener;
 import com.compiladoresufabc.ptbrlangcompiler.commons.generator.Program;
+import com.compiladoresufabc.ptbrlangcompiler.framework.adapter.in.CompilerAdapter;
 
 @Component
 public class CompilerServiceHelper {
+	
+	private static final Logger log = LoggerFactory.getLogger(CompilerAdapter.class);
 
 	@Value("${compiler.output-directory}")
 	private String outputDirectory;
@@ -35,14 +40,17 @@ public class CompilerServiceHelper {
 	private List<String> syntaxErrors;
 
 	public ResponseEntity<?> processJavaFile(MultipartFile file) {
+		log.info("Linguagem a ser gerada: {}",  LanguageType.JAVA);
 		return processFile(file, LanguageType.JAVA);
 	}
 
 	public ResponseEntity<?> processCFile(MultipartFile file) {
+		log.info("Linguagem a ser gerada: {}",  LanguageType.C);
 		return processFile(file, LanguageType.C);
 	}
 
 	public ResponseEntity<?> processPythonFile(MultipartFile file) {
+		log.info("Linguagem a ser gerada: {}",  LanguageType.PYTHON);
 		return processFile(file, LanguageType.PYTHON);
 	}
 
@@ -81,8 +89,12 @@ public class CompilerServiceHelper {
 			
 			parser.removeErrorListeners();  // Remove listeners padrão
 	        parser.addErrorListener(new SyntaxErrorListener(syntaxErrors));
+	        String separator = "=".repeat(50);
+	        String end = "=".repeat(130);
 
+	        log.info("{} LOGS E WARNINGS PARSER/LEXER {}", separator, separator);
 			parser.programa();
+			log.info("{}", end);
 			
 			if (!syntaxErrors.isEmpty()) {
 	            throw new IOException("Erros de sintaxe encontrados: \n" + String.join("\n", syntaxErrors));
@@ -92,7 +104,7 @@ public class CompilerServiceHelper {
 
 			String generatedCode = program.generateCode(language);
 			
-			System.out.println(generatedCode);
+			log.info("Código gerado: {}",  generatedCode);
 			
 			FileWriter fW = new FileWriter(outputFile);
 			PrintWriter pW = new PrintWriter(fW);
