@@ -110,7 +110,7 @@ escreva (id);
 ```
 #### Condição
 ```
-se (expr) entao
+se (listExpr) entao
     comandos
 senao
     comandos
@@ -118,14 +118,14 @@ fimse
 ```
 #### Laços de Repetição (enquanto / faca...enquanto)
 ```
-enquanto (expr) faca
+enquanto (listExpr) faca
     comandos
 fimenquanto
 ```
 ```
 faca
     comandos
-enquanto (expr)
+enquanto (listExpr)
 fimenquanto
 ```
 
@@ -145,6 +145,8 @@ fimenquanto
 >= (maior ou igual)
 <> (diferente)
 == (igual)
+AND (e)
+OR (ou)
 ```
 
 ### Exemplo de Programa
@@ -214,63 +216,196 @@ fimprograma
 ```
 grammar PtBrLangGrammar;
 
-programa
-    : 'programa' ID declaravar+ 'inicio' comando+ 'fim' 'fimprograma'
-    ;
+@header {
+import java.util.ArrayList;
+import java.util.Stack;
+import java.util.HashMap;
+import com.compiladoresufabc.ptbrlangcompiler.domains.*;
+import com.compiladoresufabc.ptbrlangcompiler.commons.errors.*;
+import com.compiladoresufabc.ptbrlangcompiler.commons.generator.*;
+import com.compiladoresufabc.ptbrlangcompiler.runtime.*;
+}
+
+@members {
+    private HashMap<String,Var> symbolTable = new HashMap<>();
+    private ArrayList<Var> currentDecl = new ArrayList<>();
+    private Types currentType;
+    private Types leftType = null, rightType = null;
+    private Program program = new Program();
+    private String strExpr = "";
+    private ArrayList<String> exprList;
+    private String strOp = "";
+    private IfCommand currentIfCommand;
+    private WhileCommand whileCommand;
+    private AtribCommand atribCommand;
+    private Stack<ArrayList<Command>> stack = new Stack<>();
+    private Stack<AbstractExpression> exprStack = new Stack<>();
+    private AbstractExpression top = null;
+
+    public double generateValue() {
+        if (top == null) {
+            top = exprStack.pop();
+        }
+        return top.evaluate();
+    }
+
+    public String generateJSON() {
+        if (top == null) {
+            top = exprStack.pop();
+        }
+        return top.toJSON();
+    }
+
+    public void updateType() {
+        for (Var v : currentDecl) {
+            v.setType(currentType);
+            symbolTable.put(v.getId(), v);
+        }
+    }
+
+    public void exibirVar() {
+        for (String id : symbolTable.keySet()) {
+            System.out.println(symbolTable.get(id));
+        }
+    }
+
+    public Program getProgram() {
+        return this.program;
+    }
+
+    public boolean isDeclared(String id) {
+        return symbolTable.get(id) != null;
+    }
+    
+    public void checkUnusedVariables() {
+		String yellowColor = "\u001B[33m";
+    	String resetColor = "\u001B[0m";
+        for (Var var : symbolTable.values()) {
+            if ((var.isInitialized() && !var.isUsed()) || !(var.isInitialized() && var.isUsed())) {
+                System.out.println(yellowColor + "Warning: Variable '" + var.getId() + "' initialized/declared but never used." + resetColor);
+            }
+        }
+    }
+}
+
+programa	: 'programa' CLASS  
+              { program.setName(_input.LT(-1).getText());
+                stack.push(new ArrayList<Command>());
+              }
+               declaravar+
+               'inicio'
+               comando+
+               'fim'
+               'fimprograma'
+               {
+                  program.setSymbolTable(symbolTable);
+                  program.setCommandList(stack.pop());
+                  checkUnusedVariables();
+               }
+            ;
 
 declaravar
-    : 'declare' ID ( ',' ID )* ':' ( 'number' | 'text' | 'bool' ) ';'
+    : 'declare' { currentDecl.clear(); }
+      ID  {
+          if (isDeclared(_input.LT(-1).getText())) {
+              throw new SemanticException("Variable '" + _input.LT(-1).getText() + "' already declared.");
+          }
+          currentDecl.add(new Var(_input.LT(-1).getText()));
+      }
+      ( VIRG ID { currentDecl.add(new Var(_input.LT(-1).getText())); } )*
+      DP
+      (
+        'number' { currentType = Types.NUMBER; }
+        |
+        'text' { currentType = Types.TEXT; }
+        |
+        'bool' { currentType = Types.BOOL; }
+      )
+      { updateType(); }
+      PV
     ;
 
-comando
-    : cmdAttrib
-    | cmdLeitura
-    | cmdEscrita
-    | cmdIF
-    | cmdWhile
-    | cmdWhileReverse
+comando     : cmdAttrib
+            | cmdLeitura
+            | cmdEscrita
+            | cmdIF
+            | cmdWhile
+            | cmdWhileReverse
+            ;
+
+cmdIF		: 'se'  { stack.push(new ArrayList<Command>());
+                      exprList = new ArrayList<>();
+                      currentIfCommand = new IfCommand();
+                    }
+               AP exprList FP
+               'entao' comando+ 
+               { currentIfCommand.setTrueList(stack.pop()); }
+               ( 'senao' comando+ { currentIfCommand.setFalseList(stack.pop()); } )?
+               'fimse'
+               { stack.peek().add(currentIfCommand); }
+             ;
+
+cmdWhile	: 'enquanto' { stack.push(new ArrayList<Command>());
+                      exprList = new ArrayList<>();
+                      whileCommand = new WhileCommand(false);
+                    }
+                   AP exprList FP
+                   'faca' comando+ 
+                   'fimenquanto'
+                   { stack.peek().add(whileCommand); }
+              ;
+
+cmdWhileReverse	: 'faca' comando+
+                 'enquanto' AP exprList FP
+                 'fimenquanto'
+                 { stack.peek().add(whileCommand); }
+   ;
+
+cmdAttrib    : ID OP_AT expr PV
+    { atribCommand = new AtribCommand(symbolTable.get(_input.LT(-3).getText())); }
     ;
 
-cmdIF
-    : 'se' '(' expr ')' 'entao' comando+ 'fimse'
+cmdLeitura   : 'leia' AP ID FP PV
+    { stack.peek().add(new ReadCommand(symbolTable.get(_input.LT(-3).getText()))); }
     ;
 
-cmdWhile
-    : 'enquanto' '(' expr ')' 'faca' comando+ 'fimenquanto'
+cmdEscrita   : 'escreva' AP (ID | TEXTO) FP PV
+    { stack.peek().add(new WriteCommand(_input.LT(-3).getText())); }
     ;
 
-cmdWhileReverse
-    : 'faca' comando+ 'enquanto' '(' expr ')' 'fimenquanto'
+expr         : termo (OP_SUM termo | OP_SUB termo)*
+    { rightType = leftType; }
     ;
 
-cmdAttrib
-    : ID ':=' expr ';'
+termo        : fator (OP_MUL fator | OP_DIV fator)*
+    { rightType = leftType; }
     ;
 
-cmdLeitura
-    : 'leia' '(' ID ')' ';'
+fator        : ID | NUM | TEXTO | BOOL
+    { rightType = symbolTable.get(_input.LT(-1).getText()).getType(); }
     ;
 
-cmdEscrita
-    : 'escreva' '(' ( ID | TEXTO ) ')' ';'
+exprList     : expr (OPREL expr)*
     ;
 
-expr
-    : termo ( '+' termo | '-' termo )*
-    ;
-
-termo
-    : fator ( '*' fator | '/' fator )*
-    ;
-
-fator
-    : ID | NUM | TEXTO | BOOL
-    ;
-
-ID: [a-zA-Z] [a-zA-Z0-9]*;
-NUM: ('-')? [0-9]+ ('.' [0-9]+)?;
-TEXTO: '"' [a-zA-Z0-9 ]* '"';
-BOOL: 'Verdadeiro' | 'Falso';
-WS: [ \t\r\n]+ -> skip;
+OP_SUM       : '+';
+OP_SUB       : '-';
+OP_MUL       : '*';
+OP_DIV       : '/';
+OP_AT        : ':=' | '+=' | '-=' | '++' | '--';
+OPREL        : '>' | '<' | '>=' | '<= ' | '<>' | '==';
+ID           : [a-z] ( [a-z] | [A-Z] | [0-9] )*;
+NUM          : ('-')?[0-9]+('.'[0-9]+)?;
+VIRG         : ',';
+PV           : ';';
+AP           : '(';
+FP           : ')';
+DP           : ':';
+AND          : 'AND';
+OR           : 'OR';
+TEXTO        : '"' .*? '"';
+WS           : [ \t\r\n]+ -> skip;
+BOOL         : 'Verdadeiro' | 'Falso';
+CLASS        : [A-Z] ( [A-Z] | [a-z] | [0-9] )*;
 ```
 
