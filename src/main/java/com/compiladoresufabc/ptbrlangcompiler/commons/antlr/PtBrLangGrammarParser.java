@@ -29,8 +29,8 @@ public class PtBrLangGrammarParser extends Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
 		OP_SUM=18, OP_SUB=19, OP_MUL=20, OP_DIV=21, OP_AT=22, OPREL=23, ID=24, 
-		NUM=25, VIRG=26, PV=27, AP=28, FP=29, DP=30, AND=31, OR=32, TEXTO=33, 
-		WS=34, BOOL=35, CLASS=36;
+		NUM=25, VIRG=26, PV=27, AP=28, FP=29, DP=30, AND=31, OR=32, NOT=33, TEXTO=34, 
+		WS=35, BOOL=36, CLASS=37;
 	public static final int
 		RULE_programa = 0, RULE_declaravar = 1, RULE_comando = 2, RULE_cmdIF = 3, 
 		RULE_cmdWhile = 4, RULE_cmdWhileReverse = 5, RULE_cmdAttrib = 6, RULE_cmdLeitura = 7, 
@@ -51,7 +51,7 @@ public class PtBrLangGrammarParser extends Parser {
 			"'number'", "'text'", "'bool'", "'se'", "'entao'", "'senao'", "'fimse'", 
 			"'enquanto'", "'faca'", "'fimenquanto'", "'leia'", "'escreva'", "'+'", 
 			"'-'", "'*'", "'/'", null, null, null, null, "','", "';'", "'('", "')'", 
-			"':'", "'AND'", "'OR'"
+			"':'", "'AND'", "'OR'", "'NOT'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -60,7 +60,7 @@ public class PtBrLangGrammarParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, "OP_SUM", "OP_SUB", "OP_MUL", "OP_DIV", 
 			"OP_AT", "OPREL", "ID", "NUM", "VIRG", "PV", "AP", "FP", "DP", "AND", 
-			"OR", "TEXTO", "WS", "BOOL", "CLASS"
+			"OR", "NOT", "TEXTO", "WS", "BOOL", "CLASS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -530,6 +530,10 @@ public class PtBrLangGrammarParser extends Parser {
 							                  symbolTable.get(var).setUsed(true);
 							              }
 							          }
+							          
+							        if (exprList.isEmpty() || exprList.get(0).trim().isEmpty()) {
+										throw new SemanticException("Missing or invalid condition in 'if' statement at line " + _input.LT(1).getLine() + ".");
+									}
 							      
 			setState(85);
 			match(FP);
@@ -655,6 +659,10 @@ public class PtBrLangGrammarParser extends Parser {
 							                  symbolTable.get(var).setUsed(true);
 							              }
 							          }
+							          
+							        if (exprList.isEmpty() || exprList.get(0).trim().isEmpty()) {
+							          throw new SemanticException("Missing or invalid condition in 'while' statement at line " + _input.LT(1).getLine() + ".");
+							        }
 							      
 			setState(113);
 			match(FP);
@@ -773,6 +781,10 @@ public class PtBrLangGrammarParser extends Parser {
 				                  symbolTable.get(var).setUsed(true);
 				              }
 				          }
+				          
+				        if (exprList.isEmpty() || exprList.get(0).trim().isEmpty()) {
+							throw new SemanticException("Missing or invalid condition in 'do-while' statement at line " + _input.LT(1).getLine() + ".");
+						}
 				      
 			setState(138);
 			match(FP);
@@ -991,9 +1003,18 @@ public class PtBrLangGrammarParser extends Parser {
 			{
 			setState(160);
 			termo();
-			 Command cmdWrite = new WriteCommand(_input.LT(-1).getText());
-			                         stack.peek().add(cmdWrite);
-			                       
+			 
+								        String content = _input.LT(-1).getText();
+								            
+								        if (!content.startsWith("\"")) {
+								            Types varType = symbolTable.get(content).getType();
+								            Command cmdWrite = new WriteCommand(content, varType);
+								            stack.peek().add(cmdWrite);
+								        } else {
+								            Command cmdWrite = new WriteCommand(content, Types.TEXT);
+								            stack.peek().add(cmdWrite);
+								        }
+								    
 			}
 			setState(163);
 			match(FP);
@@ -1467,6 +1488,10 @@ public class PtBrLangGrammarParser extends Parser {
 					match(OPREL);
 
 					            exprList.add(_input.LT(-1).getText());
+					            
+					            if (_input.LT(-1).getText().matches("[<>]=?") && leftType != Types.NUMBER) {
+					                throw new SemanticException("Operator '" + _input.LT(-1).getText() + "' can only be applied to numeric types at line " + _input.LT(1).getLine());
+					            }
 					          
 					setState(208);
 					((ExprListContext)_localctx).e2 = expr();
@@ -1531,6 +1556,10 @@ public class PtBrLangGrammarParser extends Parser {
 						match(OPREL);
 
 						            exprList.add(_input.LT(-1).getText());
+						            
+						            if (_input.LT(-1).getText().matches("[<>]=?") && leftType != Types.NUMBER) {
+						                throw new SemanticException("Operator '" + _input.LT(-1).getText() + "' can only be applied to numeric types at line " + _input.LT(1).getLine());
+						            }
 						          
 						setState(222);
 						((ExprListContext)_localctx).e4 = expr();
@@ -1578,7 +1607,7 @@ public class PtBrLangGrammarParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001$\u00eb\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001%\u00eb\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
@@ -1623,7 +1652,7 @@ public class PtBrLangGrammarParser extends Parser {
 		"\u0000\u0000\u0000\u0012\u00a7\u0001\u0000\u0000\u0000\u0014\u00af\u0001"+
 		"\u0000\u0000\u0000\u0016\u00b4\u0001\u0000\u0000\u0000\u0018\u00bc\u0001"+
 		"\u0000\u0000\u0000\u001a\u00c9\u0001\u0000\u0000\u0000\u001c\u00cb\u0001"+
-		"\u0000\u0000\u0000\u001e\u001f\u0005\u0001\u0000\u0000\u001f \u0005$\u0000"+
+		"\u0000\u0000\u0000\u001e\u001f\u0005\u0001\u0000\u0000\u001f \u0005%\u0000"+
 		"\u0000 \"\u0006\u0000\uffff\uffff\u0000!#\u0003\u0002\u0001\u0000\"!\u0001"+
 		"\u0000\u0000\u0000#$\u0001\u0000\u0000\u0000$\"\u0001\u0000\u0000\u0000"+
 		"$%\u0001\u0000\u0000\u0000%&\u0001\u0000\u0000\u0000&(\u0005\u0002\u0000"+
@@ -1702,8 +1731,8 @@ public class PtBrLangGrammarParser extends Parser {
 		"\u0003\u0016\u000b\u0000\u00bf\u00c0\u0006\f\uffff\uffff\u0000\u00c0\u0019"+
 		"\u0001\u0000\u0000\u0000\u00c1\u00c2\u0005\u0018\u0000\u0000\u00c2\u00ca"+
 		"\u0006\r\uffff\uffff\u0000\u00c3\u00c4\u0005\u0019\u0000\u0000\u00c4\u00ca"+
-		"\u0006\r\uffff\uffff\u0000\u00c5\u00c6\u0005!\u0000\u0000\u00c6\u00ca"+
-		"\u0006\r\uffff\uffff\u0000\u00c7\u00c8\u0005#\u0000\u0000\u00c8\u00ca"+
+		"\u0006\r\uffff\uffff\u0000\u00c5\u00c6\u0005\"\u0000\u0000\u00c6\u00ca"+
+		"\u0006\r\uffff\uffff\u0000\u00c7\u00c8\u0005$\u0000\u0000\u00c8\u00ca"+
 		"\u0006\r\uffff\uffff\u0000\u00c9\u00c1\u0001\u0000\u0000\u0000\u00c9\u00c3"+
 		"\u0001\u0000\u0000\u0000\u00c9\u00c5\u0001\u0000\u0000\u0000\u00c9\u00c7"+
 		"\u0001\u0000\u0000\u0000\u00ca\u001b\u0001\u0000\u0000\u0000\u00cb\u00cc"+

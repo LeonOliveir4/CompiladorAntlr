@@ -4,5 +4,5 @@ import com.compiladoresufabc.ptbrlangcompiler.commons.enums.LanguageType;
 
 public abstract class Command {
 
-	public abstract String generateCode(LanguageType language);
+	public abstract String generateCode(LanguageType language, int indentLevel);
 }

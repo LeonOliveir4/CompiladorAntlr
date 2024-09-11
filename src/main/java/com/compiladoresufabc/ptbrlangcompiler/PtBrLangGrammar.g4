@@ -136,6 +136,10 @@ cmdIF		: 'se'  { stack.push(new ArrayList<Command>());
 				                  symbolTable.get(var).setUsed(true);
 				              }
 				          }
+				          
+				        if (exprList.isEmpty() || exprList.get(0).trim().isEmpty()) {
+							throw new SemanticException("Missing or invalid condition in 'if' statement at line " + _input.LT(1).getLine() + ".");
+						}
 				      }
                FP  {
                      if (exprList.size() == 1 && leftType != Types.BOOL) {
@@ -173,6 +177,10 @@ cmdWhile	: 'enquanto' { stack.push(new ArrayList<Command>());
 				                  symbolTable.get(var).setUsed(true);
 				              }
 				          }
+				          
+				        if (exprList.isEmpty() || exprList.get(0).trim().isEmpty()) {
+				          throw new SemanticException("Missing or invalid condition in 'while' statement at line " + _input.LT(1).getLine() + ".");
+				        }
 				      }
                    FP	{
                                     if (exprList.size() == 1 && leftType != Types.BOOL) {
@@ -201,6 +209,10 @@ cmdWhileReverse	: 'faca' { stack.push(new ArrayList<Command>());
 	                  symbolTable.get(var).setUsed(true);
 	              }
 	          }
+	          
+	        if (exprList.isEmpty() || exprList.get(0).trim().isEmpty()) {
+				throw new SemanticException("Missing or invalid condition in 'do-while' statement at line " + _input.LT(1).getLine() + ".");
+			}
 	      }
      FP  {
                         if (exprList.size() == 1 && leftType != Types.BOOL) {
@@ -281,10 +293,19 @@ cmdLeitura
     FP PV;
 
 cmdEscrita  : 'escreva' AP
-              ( termo  { Command cmdWrite = new WriteCommand(_input.LT(-1).getText());
-                         stack.peek().add(cmdWrite);
-                       }
-              )
+              ( termo  { 
+					        String content = _input.LT(-1).getText();
+					            
+					        if (!content.startsWith("\"")) {
+					            Types varType = symbolTable.get(content).getType();
+					            Command cmdWrite = new WriteCommand(content, varType);
+					            stack.peek().add(cmdWrite);
+					        } else {
+					            Command cmdWrite = new WriteCommand(content, Types.TEXT);
+					            stack.peek().add(cmdWrite);
+					        }
+					    }
+				    )
               FP PV { rightType = null;}
    ;
 
@@ -391,6 +412,10 @@ exprList
       (
         (OPREL {
             exprList.add(_input.LT(-1).getText());
+            
+            if (_input.LT(-1).getText().matches("[<>]=?") && leftType != Types.NUMBER) {
+                throw new SemanticException("Operator '" + _input.LT(-1).getText() + "' can only be applied to numeric types at line " + _input.LT(1).getLine());
+            }
           }
           e2=expr {
             exprList.add($e2.text);
@@ -421,6 +446,10 @@ exprList
 
         (OPREL {
             exprList.add(_input.LT(-1).getText());
+            
+            if (_input.LT(-1).getText().matches("[<>]=?") && leftType != Types.NUMBER) {
+                throw new SemanticException("Operator '" + _input.LT(-1).getText() + "' can only be applied to numeric types at line " + _input.LT(1).getLine());
+            }
           }
           e4=expr {
             exprList.add($e4.text);
@@ -485,6 +514,9 @@ AND			: 'AND'
    ;
 
 OR			: 'OR'
+   ;
+   
+NOT			: 'NOT'
    ;
 
 TEXTO       : '"' ( [a-z] | [A-Z] | [0-9] | ',' | '.' | ' ' | '-' )* '"'

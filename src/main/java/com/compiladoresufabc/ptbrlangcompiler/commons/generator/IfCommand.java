@@ -47,7 +47,7 @@ public class IfCommand extends Command {
     }
 
     @Override
-    public String generateCode(LanguageType language) {
+    public String generateCode(LanguageType language, int indentLevel) {
         return switch (language) {
             case JAVA -> generateJavaCode();
             case C -> generateCCode();
@@ -66,6 +66,8 @@ public class IfCommand extends Command {
             	expressionPart = expressionPart.replace(expressionPart, "true");
 			} else if (Constants.FALSO.getValue().equalsIgnoreCase(expressionPart)) {
 				expressionPart = expressionPart.replace(expressionPart, "false");
+			} else if ("<>".equalsIgnoreCase(expressionPart)) {
+				expressionPart = expressionPart.replace(expressionPart, "!=");
 			}
             builder.append(expressionPart);
             if (i < expressions.size() - 1) {
@@ -75,14 +77,14 @@ public class IfCommand extends Command {
 
         builder.append(") {\n");
         for (Command cmdValue : trueList) {
-            builder.append("\t\t\t").append(cmdValue.generateCode(LanguageType.JAVA));
+            builder.append("\t\t\t").append(cmdValue.generateCode(LanguageType.JAVA, 0));
         }
         builder.append("\t\t}\n");
 
         if (!falseList.isEmpty()) {
             builder.append("\t\telse {\n");
             for (Command cmdValue : falseList) {
-                builder.append("\t\t\t").append(cmdValue.generateCode(LanguageType.JAVA));
+                builder.append("\t\t\t").append(cmdValue.generateCode(LanguageType.JAVA, 0));
             }
             builder.append("\t\t}\n");
         }
@@ -100,6 +102,8 @@ public class IfCommand extends Command {
             	expressionPart = expressionPart.replace(expressionPart, "true");
 			} else if (Constants.FALSO.getValue().equalsIgnoreCase(expressionPart)) {
 				expressionPart = expressionPart.replace(expressionPart, "false");
+			} else if ("<>".equalsIgnoreCase(expressionPart)) {
+				expressionPart = expressionPart.replace(expressionPart, "!=");
 			}
             builder.append(expressionPart);
             if (i < expressions.size() - 1) {
@@ -109,16 +113,16 @@ public class IfCommand extends Command {
 
         builder.append(") {\n");
         for (Command cmdValue : trueList) {
-            builder.append("\t").append(cmdValue.generateCode(LanguageType.C)).append("\n");
+            builder.append("\t\t").append(cmdValue.generateCode(LanguageType.C, 1));
         }
-        builder.append("}\n");
+        builder.append("\t}\n");
 
         if (!falseList.isEmpty()) {
-            builder.append("else {\n");
+            builder.append("\telse {\n");
             for (Command cmdValue : falseList) {
-                builder.append("\t").append(cmdValue.generateCode(LanguageType.C)).append("\n");
+                builder.append("\t\t").append(cmdValue.generateCode(LanguageType.C, 1));
             }
-            builder.append("}\n");
+            builder.append("\t}\n");
         }
 
         return builder.toString();
@@ -134,6 +138,8 @@ public class IfCommand extends Command {
             	expressionPart = expressionPart.replace(expressionPart, "True");
 			} else if (Constants.FALSO.getValue().equalsIgnoreCase(expressionPart)) {
 				expressionPart = expressionPart.replace(expressionPart, "False");
+			} else if ("<>".equalsIgnoreCase(expressionPart)) {
+				expressionPart = expressionPart.replace(expressionPart, "!=");
 			}
             builder.append(expressionPart);
             if (i < expressions.size() - 1) {
@@ -143,13 +149,13 @@ public class IfCommand extends Command {
 
         builder.append(":\n");
         for (Command cmdValue : trueList) {
-            builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON)).append("\n");
+            builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON, 1)).append("\n");
         }
 
         if (!falseList.isEmpty()) {
             builder.append("else:\n");
             for (Command cmdValue : falseList) {
-                builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON)).append("\n");
+                builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON, 1)).append("\n");
             }
         }
 

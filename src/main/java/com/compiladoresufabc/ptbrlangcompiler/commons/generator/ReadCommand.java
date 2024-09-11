@@ -26,12 +26,12 @@ public class ReadCommand extends Command {
 	}
 
 	@Override
-	public String generateCode(LanguageType language) {
+	public String generateCode(LanguageType language, int indentLevel) {
 		return switch (language) {
-			case JAVA -> generateJavaCode();
-			case C -> generateCCode();
-			case PYTHON -> generatePythonCode();
-			default -> null;
+		case JAVA -> generateJavaCode();
+		case C -> generateCCode(indentLevel);
+		case PYTHON -> generatePythonCode(indentLevel);
+		default -> null;
 		};
 	}
 
@@ -39,57 +39,60 @@ public class ReadCommand extends Command {
 		StringBuilder builder = new StringBuilder();
 		builder.append(var.getId() + " = ");
 		switch (var.getType()) {
-			case Types.NUMBER -> {
-				builder.append("_scTrx.nextDouble();\n");
-				builder.append("\t\t_scTrx.nextLine();");
-			}
-			case Types.TEXT -> builder.append("_scTrx.nextLine();");
-			case Types.BOOL -> builder.append("_scTrx.nextBoolean();");
-			default -> throw new IllegalArgumentException("Unexpected value: " + var.getType());
+		case Types.NUMBER -> {
+			builder.append("_scTrx.nextDouble();\n");
+			builder.append("\t\t_scTrx.nextLine();");
+		}
+		case Types.TEXT -> builder.append("_scTrx.nextLine();");
+		case Types.BOOL -> builder.append("_scTrx.nextBoolean();");
+		default -> throw new IllegalArgumentException("Unexpected value: " + var.getType());
 		}
 		builder.append("\n");
 		return builder.toString();
 	}
 
-	private String generateCCode() {
+	private String generateCCode(int indentLevel) {
 		StringBuilder builder = new StringBuilder();
-		if (var.getType().equals(Types.BOOL)) {
-		    builder.append("char input[6];\n")
-		           .append("scanf(\"%s\", input);\n")
-		           .append("if (strcmp(input, \"true\") == 0) {\n")
-		           .append("    c = true;\n")
-		           .append("} else if (strcmp(input, \"false\") == 0) {\n")
-		           .append("    c = false;\n")
-		           .append("} else {\n")
-		           .append("    printf(\"Invalid boolean value\\n\");\n")
-		           .append("    exit(1);\n")
-		           .append("}\n");
-		} else {
-		    builder.append("scanf(\"%")
-		           .append(var.getType().equals(Types.NUMBER) ? "f" : "s")
-		           .append("\", &")
-		           .append(var.getId())
-		           .append(");\n");
-		}
-		return builder.toString();
+	    String indent = "\t".repeat(indentLevel);  // Nível de indentação
+	    if (var.getType().equals(Types.BOOL)) {
+	        builder.append(indent).append("char input[6];\n")
+	               .append(indent).append("\tscanf(\"%5s\", input);\n")
+	               .append(indent).append("\tif (strcmp(input, \"true\") == 0) {\n")
+	               .append(indent).append("\t\t").append(var.getId()).append(" = true;\n")
+	               .append(indent).append("\t} else if (strcmp(input, \"false\") == 0) {\n")
+	               .append(indent).append("\t\t").append(var.getId()).append(" = false;\n")
+	               .append(indent).append("\t} else {\n")
+	               .append(indent).append("\t\tprintf(\"Invalid boolean value\\n\");\n")
+	               .append(indent).append("\t\texit(1);\n")
+	               .append(indent).append("\t}\n");
+
+	    } else if (var.getType().equals(Types.TEXT)) {
+	        builder.append(indent).append("scanf(\"%100s\", ").append(var.getId()).append(");\n");
+
+	    } else {
+	        builder.append(indent).append("scanf(\"%")
+	               .append(var.getType().equals(Types.NUMBER) ? "f" : "s")
+	               .append("\", &").append(var.getId()).append(");\n");
+	    }
+
+	    return builder.toString();
 	}
 
-	private String generatePythonCode() {
+	private String generatePythonCode(int indentLevel) {
 		StringBuilder builder = new StringBuilder();
+		String indent = "\t".repeat(indentLevel); 
 
 		if (var.getType().equals(Types.BOOL)) {
-		    builder.append(var.getId()).append(" = ")
-		           .append("input().strip().lower()\n")
-		           .append("\tif ").append(var.getId()).append(" == 'true':\n")
-		           .append("\t\t").append(var.getId()).append(" = True\n")
-		           .append("\telif ").append(var.getId()).append(" == 'false':\n")
-		           .append("\t\t").append(var.getId()).append(" = False\n")
-		           .append("\telse:\n")
-		           .append("\t\traise ValueError('Invalid boolean value')\n");
+			builder.append(var.getId()).append(" = ").append("input().strip().lower()\n")
+            .append(indent).append("if ").append(var.getId()).append(" == 'true':\n")
+            .append(indent).append("\t").append(var.getId()).append(" = True\n")
+            .append(indent).append("elif ").append(var.getId()).append(" == 'false':\n")
+            .append(indent).append("\t").append(var.getId()).append(" = False\n")
+            .append(indent).append("else:\n")
+            .append(indent).append("\traise ValueError('Invalid boolean value')\n");
 		} else {
-		    builder.append(var.getId()).append(" = ")
-		           .append(var.getType().equals(Types.NUMBER) ? "int(input())" : "input()")
-		           .append("\n");
+			builder.append(var.getId()).append(" = ")
+					.append(var.getType().equals(Types.NUMBER) ? "int(input())" : "input()").append("\n");
 		}
 
 		return builder.toString();

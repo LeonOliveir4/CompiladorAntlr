@@ -2,15 +2,14 @@ package com.compiladoresufabc.ptbrlangcompiler.commons.generator;
 
 import com.compiladoresufabc.ptbrlangcompiler.commons.enums.Constants;
 import com.compiladoresufabc.ptbrlangcompiler.commons.enums.LanguageType;
+import com.compiladoresufabc.ptbrlangcompiler.domains.Types;
 import com.compiladoresufabc.ptbrlangcompiler.domains.Var;
-import com.compiladoresufabc.ptbrlangcompiler.commons.antlr.PtBrLangGrammarParser;
 
 public class AtribCommand extends Command {
 
 	private Var var;
 	private String exprString;
 	private String strOp;
-	private PtBrLangGrammarParser parser;
 
 	public AtribCommand() {
 		super();
@@ -46,7 +45,7 @@ public class AtribCommand extends Command {
 	}
 
 	@Override
-	public String generateCode(LanguageType language) {
+	public String generateCode(LanguageType language, int indentLevel) {
 		return switch (language) {
 			case JAVA -> generateJavaCode();
 			case C -> generateCCode();
@@ -82,23 +81,33 @@ public class AtribCommand extends Command {
 
 	private String generateCCode() {
 		StringBuilder atribBuild = new StringBuilder();
-		if (strOp.equalsIgnoreCase("++") || strOp.equalsIgnoreCase("--")) {
-			atribBuild.append(var.getId() + strOp);
-		} else {
-			if (strOp.equalsIgnoreCase(":=")) {
-				strOp = "=";
-			}
-			atribBuild.append(var.getId() + " " + strOp  + " ");
-		}
-		if (null != exprString) {
-			if (Constants.VERDADEIRO.getValue().equalsIgnoreCase(exprString)) {
-				exprString = exprString.replace(exprString, "true");
-			} else if (Constants.FALSO.getValue().equalsIgnoreCase(exprString)) {
-				exprString = exprString.replace(exprString, "false");
-			}
-			atribBuild.append(exprString);
-		}
-		atribBuild.append(";");
+
+	    if (strOp.equalsIgnoreCase("++") || strOp.equalsIgnoreCase("--")) {
+	        atribBuild.append(var.getId() + strOp);  // Adiciona o operador ao ID da variável
+
+	    } else {
+	        if (strOp.equalsIgnoreCase(":=")) {
+	            strOp = "=";
+	        }
+
+	        atribBuild.append(var.getId() + " " + strOp + " ");
+	    }
+
+	    if (null != exprString) {
+	        if (Constants.VERDADEIRO.getValue().equalsIgnoreCase(exprString)) {
+	            exprString = "true";
+	        } else if (Constants.FALSO.getValue().equalsIgnoreCase(exprString)) {
+	            exprString = "false";
+	        }
+
+	        if (var.getType().equals(Types.TEXT)) {
+	            atribBuild.append("strcpy(" + var.getId() + ", " + exprString + ")");
+	        } else {
+	            atribBuild.append(exprString);
+	        }
+	    }
+
+	    atribBuild.append(";\n");
 
 		return atribBuild.toString();
 	}

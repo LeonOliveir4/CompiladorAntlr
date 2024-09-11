@@ -65,7 +65,7 @@ public class Program {
 		}
 
 		for (Command cmdValue : commandList) {
-			builder.append("\t\t").append(cmdValue.generateCode(LanguageType.JAVA));
+			builder.append("\t\t").append(cmdValue.generateCode(LanguageType.JAVA, 0));
 		}
 		builder.append("\t\t_scTrx.close();\n");
 		builder.append("\t}\n");
@@ -78,22 +78,26 @@ public class Program {
 		builder.append("#include <stdio.h>\n");
 		builder.append("#include <stdlib.h>\n");
 		builder.append("#include <stdbool.h>\n");
-		builder.append("#include <string.h>\n");
+		builder.append("#include <string.h>\n\n");
 		builder.append("int main() { \n");
 		for (String varId : symbolTable.keySet()) {
 			Var var = symbolTable.get(varId);
 			if (var.getType() == Types.NUMBER) {
-				builder.append("    float ");
+				builder.append("\tfloat ");
 			} else if (var.getType() == Types.TEXT) {
-				builder.append("    char ");
+				builder.append("\tchar ");
 			} else if (var.getType() == Types.BOOL) {
-				builder.append("   bool ");
+				builder.append("\tbool ");
 			}
-			builder.append(var.getId() + ";\n");
+			if (var.getType() == Types.TEXT) {
+				builder.append(var.getId() + "[101]" + ";\n");
+			} else { 
+				builder.append(var.getId() + ";\n");
+			}
 		}
 
 		for (Command cmdValue : commandList) {
-			builder.append(cmdValue.generateCode(LanguageType.C));
+			builder.append("\t").append(cmdValue.generateCode(LanguageType.C, 0));
 		}
 		builder.append("   return 0;\n");
 		builder.append("}\n");
@@ -114,7 +118,7 @@ public class Program {
 		}
 
 		for (Command cmdValue : commandList) {
-			builder.append(cmdValue.generateCode(LanguageType.PYTHON)).append("\n");
+			builder.append(cmdValue.generateCode(LanguageType.PYTHON, 0)).append("\n");
 		}
 		return builder.toString();
 	}

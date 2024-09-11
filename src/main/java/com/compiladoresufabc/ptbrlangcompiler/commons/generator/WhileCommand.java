@@ -37,7 +37,7 @@ public class WhileCommand extends Command {
     }
 
     @Override
-    public String generateCode(LanguageType language) {
+    public String generateCode(LanguageType language, int indentLevel) {
         return switch (language) {
             case JAVA -> generateJavaCode();
             case C -> generateCCode();
@@ -51,7 +51,7 @@ public class WhileCommand extends Command {
         if (isReverse) {
             builder.append("do {\n");
             for (Command cmdValue : trueList) {
-                builder.append("\t\t\t").append(cmdValue.generateCode(LanguageType.JAVA));
+                builder.append("\t\t\t").append(cmdValue.generateCode(LanguageType.JAVA, 0));
             }
             builder.append("\t\t} while (");
 
@@ -61,6 +61,8 @@ public class WhileCommand extends Command {
                 	expressionPart = expressionPart.replace(expressionPart, "true");
     			} else if (Constants.FALSO.getValue().equalsIgnoreCase(expressionPart)) {
     				expressionPart = expressionPart.replace(expressionPart, "false");
+    			} else if ("<>".equalsIgnoreCase(expressionPart)) {
+    				expressionPart = expressionPart.replace(expressionPart, "!=");
     			}
                 builder.append(expressionPart);
                 if (i < expressions.size() - 1) {
@@ -78,6 +80,8 @@ public class WhileCommand extends Command {
                 	expressionPart = expressionPart.replace(expressionPart, "true");
     			} else if (Constants.FALSO.getValue().equalsIgnoreCase(expressionPart)) {
     				expressionPart = expressionPart.replace(expressionPart, "false");
+    			} else if ("<>".equalsIgnoreCase(expressionPart)) {
+    				expressionPart = expressionPart.replace(expressionPart, "!=");
     			}
                 builder.append(expressionPart);
                 if (i < expressions.size() - 1) {
@@ -87,7 +91,7 @@ public class WhileCommand extends Command {
 
             builder.append(") {\n");
             for (Command cmdValue : trueList) {
-                builder.append("\t\t\t").append(cmdValue.generateCode(LanguageType.JAVA));
+                builder.append("\t\t\t").append(cmdValue.generateCode(LanguageType.JAVA, 0));
             }
             builder.append("\t\t}\n");
         }
@@ -100,9 +104,9 @@ public class WhileCommand extends Command {
         if (isReverse) {
             builder.append("do {\n");
             for (Command cmdValue : trueList) {
-                builder.append("\t").append(cmdValue.generateCode(LanguageType.C)).append("\n");
+                builder.append("\t\t").append(cmdValue.generateCode(LanguageType.C, 1)).append("\n");
             }
-            builder.append("} while (");
+            builder.append("\t} while (");
 
             for (int i = 0; i < expressions.size(); i++) {
                 String expressionPart = expressions.get(i).replace("AND", "&&").replace("OR", "||");
@@ -110,6 +114,8 @@ public class WhileCommand extends Command {
                 	expressionPart = expressionPart.replace(expressionPart, "true");
     			} else if (Constants.FALSO.getValue().equalsIgnoreCase(expressionPart)) {
     				expressionPart = expressionPart.replace(expressionPart, "false");
+    			} else if ("<>".equalsIgnoreCase(expressionPart)) {
+    				expressionPart = expressionPart.replace(expressionPart, "!=");
     			}
                 builder.append(expressionPart);
                 if (i < expressions.size() - 1) {
@@ -127,6 +133,8 @@ public class WhileCommand extends Command {
                 	expressionPart = expressionPart.replace(expressionPart, "true");
     			} else if (Constants.FALSO.getValue().equalsIgnoreCase(expressionPart)) {
     				expressionPart = expressionPart.replace(expressionPart, "false");
+    			} else if ("<>".equalsIgnoreCase(expressionPart)) {
+    				expressionPart = expressionPart.replace(expressionPart, "!=");
     			}
                 builder.append(expressionPart);
                 if (i < expressions.size() - 1) {
@@ -136,9 +144,9 @@ public class WhileCommand extends Command {
 
             builder.append(") {\n");
             for (Command cmdValue : trueList) {
-                builder.append("\t").append(cmdValue.generateCode(LanguageType.C)).append("\n");
+                builder.append("\t\t").append(cmdValue.generateCode(LanguageType.C, 1)).append("\n");
             }
-            builder.append("}\n");
+            builder.append("\t}\n");
         }
 
         return builder.toString();
@@ -149,7 +157,7 @@ public class WhileCommand extends Command {
         if (isReverse) {
             builder.append("while True:\n");
             for (Command cmdValue : trueList) {
-                builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON)).append("\n");
+                builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON, 1)).append("\n");
             }
             builder.append("\n\tif not (");
 
@@ -159,6 +167,8 @@ public class WhileCommand extends Command {
                 	expressionPart = expressionPart.replace(expressionPart, "True");
     			} else if (Constants.FALSO.getValue().equalsIgnoreCase(expressionPart)) {
     				expressionPart = expressionPart.replace(expressionPart, "False");
+    			} else if ("<>".equalsIgnoreCase(expressionPart)) {
+    				expressionPart = expressionPart.replace(expressionPart, "!=");
     			}
                 builder.append(expressionPart);
                 if (i < expressions.size() - 1) {
@@ -176,6 +186,8 @@ public class WhileCommand extends Command {
                 	expressionPart = expressionPart.replace(expressionPart, "True");
     			} else if (Constants.FALSO.getValue().equalsIgnoreCase(expressionPart)) {
     				expressionPart = expressionPart.replace(expressionPart, "False");
+    			} else if ("<>".equalsIgnoreCase(expressionPart)) {
+    				expressionPart = expressionPart.replace(expressionPart, "!=");
     			}
                 builder.append(expressionPart);
                 if (i < expressions.size() - 1) {
@@ -185,7 +197,7 @@ public class WhileCommand extends Command {
 
             builder.append("):\n");
             for (Command cmdValue : trueList) {
-                builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON)).append("\n");
+                builder.append("\t").append(cmdValue.generateCode(LanguageType.PYTHON, 1)).append("\n");
             }
         }
 
