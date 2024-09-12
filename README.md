@@ -1,5 +1,10 @@
 ﻿# PtBrLang - Linguagem de Programação em Português
 
+## Desenvolvido pelos alunos:
+- Leonardo Pires de Oliveira - 11201920744
+- Ubirata Emiliano Fonseca Costa - 11201812211
+- Link para o vídeo: https://www.youtube.com/watch?v=Hl-z93B0TY4
+
 - Comando mvn para atualizar o core de arquivos do compilador `mvn generate-sources`
 
 - Para iniciar o projeto basta startar o spring boot com o comando `mvn exec:java -Dexec.mainClass="com.compiladoresufabc.ptbrlangcompiler.PtBrLangCompilerApplication"` (java 21, maven superior a 3.6)
@@ -66,7 +71,7 @@ A gramática deve seguir as seguintes regras:
 - [x] **API Rest para o Compilador**: Implementação da API REST para o compilador.
 - [x] **Suporte a múltiplas linguagens-alvo (C e Python)**.
 - [x] **Avaliador de Expressões aritméticas e lógicas**. 
-- [x] **Implementar Operadores Lógicos**: Adicionar suporte a operadores lógicos (AND, OR) na linguagem e no compilador.
+- [x] **Implementar Operadores Lógicos**: Adicionar suporte a operadores lógicos (AND, OR) na linguagem e no compilador. (NOT ficou também pendente para futuros desenvolvimentos).
 - [ ] **Editor Highlight (simulando uma pequena IDE)** - Pendência para futuros desenvolvimentos.
 
 ---
