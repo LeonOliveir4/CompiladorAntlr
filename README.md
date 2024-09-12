@@ -1,9 +1,9 @@
-﻿# PtBrLang - Linguagem de Programação em Português
-
-## Desenvolvido pelos alunos:
+# Desenvolvido pelos alunos:
 - Leonardo Pires de Oliveira - 11201920744
 - Ubirata Emiliano Fonseca Costa - 11201812211
 - Link para o vídeo: https://www.youtube.com/watch?v=Hl-z93B0TY4
+ 
+# PtBrLang - Linguagem de Programação em Português
 
 - Comando mvn para atualizar o core de arquivos do compilador `mvn generate-sources`
 
